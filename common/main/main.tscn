@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://ndytlmwu8xmc"]
+
+[ext_resource type="Script" uid="uid://dvfppm0lfnaq1" path="res://common/main/main.gd" id="1_v2ws0"]
+
+[node name="Main" type="Node" unique_id=122788503]
+process_mode = 3
+script = ExtResource("1_v2ws0")
+
+[node name="World" type="Node3D" parent="." unique_id=113801559]
+process_mode = 1
+
+[node name="MapRoot" type="Node3D" parent="World" unique_id=42696137]
+unique_name_in_owner = true
+
+[node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
+unique_name_in_owner = true
+
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=744466819]
+process_mode = 1
+
+[node name="HUDRoot" type="Control" parent="HUDLayer" unique_id=43794366]
+unique_name_in_owner = true
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=96238935]
+process_mode = 1
+
+[node name="TransitionRoot" type="Control" parent="TransitionLayer" unique_id=1216253339]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MenuLayer" type="CanvasLayer" parent="." unique_id=1757877203]
+process_mode = 1
+
+[node name="MenuRoot" type="Control" parent="MenuLayer" unique_id=1016014808]
+unique_name_in_owner = true
+z_index = 15
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=878647111]
+process_mode = 3
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1028285194]
+unique_name_in_owner = true
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

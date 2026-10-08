@@ -14,6 +14,10 @@ config/name="Penguin Heist"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalEvents="*uid://cq1o6bk2jxsyc"
+
 [display]
 
 window/stretch/mode="canvas_items"
