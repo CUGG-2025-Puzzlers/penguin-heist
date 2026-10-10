@@ -23,6 +23,11 @@ GlobalEvents="*uid://cq1o6bk2jxsyc"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[fusion]
+
+connection/app_id="6cf5a1a0-d173-46e3-a010-8af6cbd0ea23"
+connection/app_version="0.1"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
