@@ -17,16 +17,14 @@ func _on_connect_button_pressed() -> void:
 		return
 	
 	_set_display_name()
-	_request_connection_to_server()
+	ConnectionManager.connect_to_photon()
 
 ## Validates the display name input based on the following:
 ## - TODO: Add validation
 func _validate_display_name() -> bool:
 	return true
 
+## Sets the users display name in the settings and saves it
 func _set_display_name() -> void:
 	GameSettings.display_name = _display_name_input.text
 	GameSettings.save_user_settings()
-
-func _request_connection_to_server() -> void:
-	ConnectionManager.connect_to_photon()
