@@ -5,6 +5,8 @@ extends Menu
 
 func _ready() -> void:
 	_connect_button.pressed.connect(_on_connect_button_pressed)
+	
+	_display_name_input.text = GameSettings.display_name
 
 ## Event Handler for when the connect button is pressed
 ## Validates the display name and attempts to connect to
