@@ -3,7 +3,6 @@ extends Node
 # This script should handle the local Client's connection
 # It should not worry about remote players joining or leaving
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Subscribe to Photon Events
 	Fusion.connected_to_photon.connect(_on_connected_to_photon)
@@ -12,14 +11,13 @@ func _ready() -> void:
 	Fusion.room_joined.connect(_on_room_joined)
 	Fusion.room_left.connect(_on_room_left)
 
-
 #region Photon Event Handlers
 
 func _on_connected_to_photon() -> void:
-	pass
+	print("Successfully connected to Photon server as '%s'" % GameSettings.display_name)
 
 func _on_connection_failed(error: String) -> void:
-	pass
+	print("Failed to connect to Photon server: %s" % error)
 
 # 0 - DISCONNECTED (not connected)
 # 1 - CONNECTING (establishing connection)
