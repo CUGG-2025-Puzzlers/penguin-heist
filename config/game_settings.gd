@@ -3,8 +3,8 @@ extends Node
 # This script should handle loading and saving player settings
 
 # Paths
-const DEFAULT_SETTINGS_PATH = "res://config/settings.cfg"
-const USER_SETTINGS_PATH    = "user://settings.cfg"
+const DEFAULT_SETTINGS_PATH = "res://config/game_settings.cfg"
+const USER_SETTINGS_PATH    = "user://game_settings.cfg"
 
 # User Section Strings
 const SECTION_USER = "User"
