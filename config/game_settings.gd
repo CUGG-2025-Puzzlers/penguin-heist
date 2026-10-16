@@ -48,7 +48,7 @@ func _get_settings(config: ConfigFile) -> void:
 	display_name = config.get_value(SECTION_USER, KEY_DISPLAY_NAME, "")
 
 ## Saves the settings under the 'User' section
-func save_user_settings(name: String) -> Error:
+func save_user_settings() -> Error:
 	var config = ConfigFile.new()
 	
 	# Load config file
