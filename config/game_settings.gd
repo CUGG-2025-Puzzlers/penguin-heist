@@ -22,15 +22,17 @@ func _load_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	
 	# Try loading from user settings
+	print("Loading user settings")
 	var error_user: Error = config.load(USER_SETTINGS_PATH)
 	if error_user != OK:
-		print("Error loading user settings")
+		print("Error loading user settings: %s" % error_string(error_user))
 		
 		# Try loading from default settings
+		print("Loading default settings")
 		var error_default: Error = config.load(DEFAULT_SETTINGS_PATH)
 		if error_default != OK:
 			# Settings can't be loaded
-			print("Error loading default settings")
+			print("Error loading default settings: %s" % error_string(error_default))
 			return
 	
 	_get_settings(config)
@@ -41,7 +43,7 @@ func _load_settings() -> void:
 	# If the user settings load failed earlier, save new user settings file
 	var error_save = config.save(USER_SETTINGS_PATH)
 	if error_save != OK:
-		print("Error saving default settings to user settings")
+		print("Error saving default settings to user settings: %s" % error_string(error_save))
 
 ## Sets this class's attributes using the provided config file
 func _get_settings(config: ConfigFile) -> void:
@@ -54,7 +56,7 @@ func save_user_settings() -> Error:
 	# Load config file
 	var error = config.load(USER_SETTINGS_PATH)
 	if error != OK:
-		print("Error loading user settings")
+		print("Error loading user settings: %s" % error_string(error))
 		return error
 	
 	# Update settings
@@ -63,7 +65,7 @@ func save_user_settings() -> Error:
 	# Save changes
 	error = config.save(USER_SETTINGS_PATH)
 	if error != OK:
-		print("Error saving user settings")
+		print("Error saving user settings: %s" % error_string(error))
 		return error
 	
 	return OK
