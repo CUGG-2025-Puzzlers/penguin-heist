@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://clxo8x302tukc"]
+
+[ext_resource type="Script" uid="uid://bg4ja7if15a4q" path="res://world/menus/connection_menu/connection_menu.gd" id="1_nltye"]
+
+[node name="ConnectionMenu" type="Control" unique_id=1734036786]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nltye")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=492848299]
+layout_mode = 0
+offset_left = 438.0
+offset_top = 196.0
+offset_right = 668.0
+offset_bottom = 413.0
+alignment = 1
+
+[node name="DisplayNameInput" type="LineEdit" parent="VBoxContainer" unique_id=462216131]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ConnectButton" type="Button" parent="VBoxContainer" unique_id=1644274365]
+unique_name_in_owner = true
+layout_mode = 2
+text = "  Connect  "

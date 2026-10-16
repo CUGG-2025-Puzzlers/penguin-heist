@@ -37,11 +37,12 @@ func _on_room_left() -> void:
 #endregion
 
 # (), (user_id), (user_id, region)
-func _connect_to_photon(user_id: String) -> void:
+func connect_to_photon() -> void:
+	print("Attempting to connect to Photon server")
+	Fusion.connect_to_photon()
+
+func create_room(room_code: String, room_options: FusionRoomOptions) -> void:
 	pass
 
-func _create_room(room_code: String, room_options: FusionRoomOptions) -> void:
-	pass
-
-func _join_room(room_code: String, room_options: FusionRoomOptions) -> void:
+func join_room(room_code: String, room_options: FusionRoomOptions) -> void:
 	pass

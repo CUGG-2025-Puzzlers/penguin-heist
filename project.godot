@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameSettings="*uid://ce5nduykx84ec"
+ConnectionManager="*uid://25pc452dsh8b"
 GlobalEvents="*uid://cq1o6bk2jxsyc"
 
 [display]
