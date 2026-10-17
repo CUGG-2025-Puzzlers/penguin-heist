@@ -27,3 +27,9 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "  Connect  "
+
+[node name="ErrorLabel" type="Label" parent="VBoxContainer" unique_id=1578985686]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.827451, 0.18431373, 0.18431373, 1)
+text = "ERROR TEXT"
