@@ -4,6 +4,7 @@ extends Menu
 @onready var _connect_button:     Button   = %ConnectButton
 @onready var _error_label:        Label    = %ErrorLabel
 
+const NO_ERROR = ""
 const ERROR_INVALID_DISPLAY_NAME = "Display Name is invalid"
 const ERROR_CONNECTION_FAILED    = "Failed to connect to server"
 
@@ -13,15 +14,15 @@ func _ready() -> void:
 	
 	_display_name_input.text = GameSettings.display_name
 	_connect_button.disabled = false
-	_error_label.text = ""
+	_error_label.text = NO_ERROR
 
-#region Photon Event Handlers
+#region Event Handlers
 
+## Event Handler for when the connection to the server failed
+## Displays an error message and re-enables the connection button
 func _on_connection_failed(error: String) -> void:
 	_error_label.text = "%s: %s" % [ERROR_CONNECTION_FAILED, error]
 	_connect_button.disabled = false
-
-#endregion
 
 ## Event Handler for when the connect button is pressed
 ## Validates the display name and attempts to connect to
@@ -31,11 +32,13 @@ func _on_connect_button_pressed() -> void:
 		_error_label.text = ERROR_INVALID_DISPLAY_NAME
 		return
 	
-	_error_label.text = ""
+	_error_label.text = NO_ERROR
 	_connect_button.disabled = true
 	
 	_set_display_name()
 	ConnectionManager.connect_to_photon()
+
+#endregion
 
 ## Validates the display name input based on the following:
 ## - Length between 2 and 15 characters
