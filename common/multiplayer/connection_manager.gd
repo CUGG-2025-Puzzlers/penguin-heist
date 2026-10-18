@@ -15,6 +15,10 @@ func _ready() -> void:
 
 func _on_connected_to_photon() -> void:
 	print("Successfully connected to Photon server as '%s'" % GameSettings.display_name)
+	GlobalEvents.request_menu_close()
+	await GlobalEvents.menu_closed
+	
+	GlobalEvents.request_menu_open(UIDs.Menus[UIDs.Menu.RoomSelect])
 
 func _on_connection_failed(error: String) -> void:
 	print("Failed to connect to Photon server: %s" % error)
