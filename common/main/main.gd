@@ -78,6 +78,8 @@ func _deferred_load_map(map_uid: String) -> void:
 	
 	# TODO: Start map music
 	_current_map.spawn_players()
+	
+	GlobalEvents.complete_map_change()
 
 ## Loads a menu on top of the current scene (if there is one).[br]
 ## Restricted to only one menu loaded at any one time (i.e. no stacked menus)
@@ -105,7 +107,10 @@ func _load_menu(menu_uid: String) -> void:
 		return
 	
 	_menu_root.add_child(_current_menu)
+	
 	# TODO: Pause or lower level music
+	
+	GlobalEvents.complete_menu_open()
 
 ## Closes the current menu and returns to control to the current scene
 func _close_menu() -> void:
@@ -118,3 +123,5 @@ func _close_menu() -> void:
 	_current_menu.queue_free()
 	await get_tree().process_frame
 	# TODO: Resume or raise level music
+	
+	GlobalEvents.complete_menu_close()
