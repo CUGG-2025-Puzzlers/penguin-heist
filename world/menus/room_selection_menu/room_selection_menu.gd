@@ -10,21 +10,35 @@ extends Menu
 const ROOM_CODE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 const NO_ERROR = ""
-const ERROR_CREATE_ROOM_FAILED = "Failed to create room"
-const ERROR_JOIN_ROOM_FAILED   = "Failed to join room"
+
+var _creating_room: bool = false
+var _joining_room: bool = false
 
 func _ready() -> void:
 	_create_room_button.pressed.connect(_on_create_room_button_pressed)
 	_join_room_button.pressed.connect(_on_join_room_button_pressed)
+	Fusion.connection_failed.connect(_on_connection_failed)
 	
 	_clear_error_messages()
 
 #region Event Handlers
 
+func _on_connection_failed(error: String) -> void:
+	if _creating_room:
+		_create_room_error_label.text = error
+		_enable_buttons()
+		return
+	
+	if _joining_room:
+		_join_room_error_label.text = error
+		_enable_buttons()
+
 ## Event Handler for when the Create Room button is pressed.[br]
 ## Attempts to create and join a room
 func _on_create_room_button_pressed() -> void:
 	_disable_buttons()
+	_creating_room = true
+	
 	# TODO: Add room options
 	var room_code: String = _generate_random_code()
 	Fusion.create_room(room_code)
@@ -33,6 +47,8 @@ func _on_create_room_button_pressed() -> void:
 ## Attempts to join a room using the code in the Room Code input
 func _on_join_room_button_pressed() -> void:
 	_disable_buttons()
+	_joining_room = true
+	
 	# TODO: Add room options
 	var room_code: String = _room_code_input.text
 	Fusion.join_room(room_code)
