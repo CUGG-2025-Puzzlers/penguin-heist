@@ -11,59 +11,65 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1srbo")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1009737470]
-layout_mode = 0
-offset_left = 452.0
-offset_top = 210.0
-offset_right = 696.0
-offset_bottom = 463.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2095292225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_right = 450
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1009737470]
+layout_mode = 2
 theme_override_constants/separation = 48
 alignment = 1
 
-[node name="CreateRoomContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1923183695]
+[node name="CreateRoomContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1923183695]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
 
-[node name="CreateHeader" type="Label" parent="HBoxContainer/CreateRoomContainer" unique_id=645478486]
+[node name="CreateHeader" type="Label" parent="MarginContainer/VBoxContainer/CreateRoomContainer" unique_id=645478486]
 layout_mode = 2
 text = "Create Room"
 horizontal_alignment = 1
 
-[node name="CreateRoomButton" type="Button" parent="HBoxContainer/CreateRoomContainer" unique_id=1970902304]
+[node name="CreateRoomButton" type="Button" parent="MarginContainer/VBoxContainer/CreateRoomContainer" unique_id=1970902304]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Create"
 
-[node name="CreateErrorLabel" type="Label" parent="HBoxContainer/CreateRoomContainer" unique_id=792297203]
+[node name="CreateErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/CreateRoomContainer" unique_id=980699815]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.827451, 0.18431373, 0.18431373, 1)
 text = "ERROR TEXT"
 
-[node name="JoinRoomContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=107328823]
+[node name="JoinRoomContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=107328823]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
 
-[node name="JoinHeader" type="Label" parent="HBoxContainer/JoinRoomContainer" unique_id=981500234]
+[node name="JoinHeader" type="Label" parent="MarginContainer/VBoxContainer/JoinRoomContainer" unique_id=981500234]
 layout_mode = 2
 text = "Join Room"
 horizontal_alignment = 1
 
-[node name="RoomCodeInput" type="LineEdit" parent="HBoxContainer/JoinRoomContainer" unique_id=1930330658]
+[node name="RoomCodeInput" type="LineEdit" parent="MarginContainer/VBoxContainer/JoinRoomContainer" unique_id=1930330658]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = " Room Code"
 
-[node name="JoinRoomButton" type="Button" parent="HBoxContainer/JoinRoomContainer" unique_id=651903177]
+[node name="JoinRoomButton" type="Button" parent="MarginContainer/VBoxContainer/JoinRoomContainer" unique_id=651903177]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Join"
 
-[node name="JoinErrorLabel" type="Label" parent="HBoxContainer/JoinRoomContainer" unique_id=760160433]
+[node name="JoinErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinRoomContainer" unique_id=760160433]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.827451, 0.18431373, 0.18431373, 1)
