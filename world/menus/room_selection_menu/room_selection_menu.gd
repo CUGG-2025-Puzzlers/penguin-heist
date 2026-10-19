@@ -21,6 +21,9 @@ func _ready() -> void:
 
 #region Event Handlers
 
+## Event Handler for when a connection fails. 
+## Uses internal flags to determine which connection failed. [br]
+## Displays an error under the appropriate section
 func _on_connection_failed(error: String) -> void:
 	_enable_buttons()
 	
