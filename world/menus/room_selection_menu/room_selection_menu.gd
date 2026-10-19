@@ -39,9 +39,10 @@ func _on_create_room_button_pressed() -> void:
 	_disable_buttons()
 	_creating_room = true
 	
-	# TODO: Add room options
 	var room_code: String = _generate_random_code()
-	Fusion.create_room(room_code)
+	var room_options: FusionRoomOptions = FusionRoomOptions.new()
+	room_options.max_players = 4
+	Fusion.create_room(room_code, room_options)
 
 ## Event Handler for when the Join Room button is pressed.[br]
 ## Attempts to join a room using the code in the Room Code input
@@ -49,7 +50,6 @@ func _on_join_room_button_pressed() -> void:
 	_disable_buttons()
 	_joining_room = true
 	
-	# TODO: Add room options
 	var room_code: String = _room_code_input.text
 	Fusion.join_room(room_code)
 
