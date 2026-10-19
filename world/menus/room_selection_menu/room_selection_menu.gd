@@ -7,8 +7,6 @@ extends Menu
 @onready var _join_room_button:      Button   = %JoinRoomButton
 @onready var _join_room_error_label: Label    = %JoinErrorLabel
 
-const ROOM_CODE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 const NO_ERROR = ""
 
 var _creating_room: bool = false
@@ -39,10 +37,7 @@ func _on_create_room_button_pressed() -> void:
 	_disable_buttons()
 	_creating_room = true
 	
-	var room_code: String = _generate_random_code()
-	var room_options: FusionRoomOptions = FusionRoomOptions.new()
-	room_options.max_players = 4
-	Fusion.create_room(room_code, room_options)
+	ConnectionManager.create_room()
 
 ## Event Handler for when the Join Room button is pressed.[br]
 ## Attempts to join a room using the code in the Room Code input
@@ -50,8 +45,7 @@ func _on_join_room_button_pressed() -> void:
 	_disable_buttons()
 	_joining_room = true
 	
-	var room_code: String = _room_code_input.text
-	Fusion.join_room(room_code)
+	ConnectionManager.join_room(_room_code_input.text)
 
 #endregion
 
@@ -69,15 +63,3 @@ func _enable_buttons() -> void:
 func _disable_buttons() -> void:
 	_create_room_button.disabled = true
 	_join_room_button.disabled = true
-
-## Generates a random code for Room creation
-func _generate_random_code() -> String:
-	var code: String = ""
-	var code_length: int = 5
-	var chars_length: int = ROOM_CODE_CHARS.length()
-	
-	for i in range(code_length):
-		var r = randi() % chars_length
-		code += ROOM_CODE_CHARS[r]
-	
-	return code
