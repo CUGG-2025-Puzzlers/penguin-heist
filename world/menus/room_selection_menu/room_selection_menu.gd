@@ -22,14 +22,16 @@ func _ready() -> void:
 #region Event Handlers
 
 func _on_connection_failed(error: String) -> void:
+	_enable_buttons()
+	
 	if _creating_room:
+		_creating_room = false
 		_create_room_error_label.text = error
-		_enable_buttons()
 		return
 	
 	if _joining_room:
+		_joining_room = false
 		_join_room_error_label.text = error
-		_enable_buttons()
 
 ## Event Handler for when the Create Room button is pressed.[br]
 ## Attempts to create and join a room
