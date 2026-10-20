@@ -44,7 +44,7 @@ text = "Create"
 
 [node name="CreateErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/CreateRoomContainer" unique_id=980699815]
 unique_name_in_owner = true
-custom_maximum_size = Vector2(250, 100)
+custom_maximum_size = Vector2(250, 110)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.827451, 0.18431373, 0.18431373, 1)
 text = "ERROR TEXT"
@@ -73,7 +73,7 @@ text = "Join"
 
 [node name="JoinErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/JoinRoomContainer" unique_id=760160433]
 unique_name_in_owner = true
-custom_maximum_size = Vector2(250, 100)
+custom_maximum_size = Vector2(250, 110)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.827451, 0.18431373, 0.18431373, 1)
 text = "ERROR TEXT"
