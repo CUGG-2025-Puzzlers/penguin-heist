@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c3gtpvl27vr4t"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_cbqal"]
+
+[node name="TestMap" type="Node2D" unique_id=807114143]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=819369266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=384803664]
+size = Vector3(100, 1, 100)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=354345127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+size = Vector3(4, 4, 1)
+
+[node name="ProtoController" parent="." unique_id=1812719301 instance=ExtResource("1_cbqal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1000001, -3.7)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=450116111]
+transform = Transform3D(0.64278764, 0.49240384, -0.5868241, 0.26200262, 0.57853186, 0.77243483, 0.7198463, -0.650261, 0.24286205, -11, 8.7, 5.7)
