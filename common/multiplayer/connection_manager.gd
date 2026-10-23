@@ -17,10 +17,7 @@ func _ready() -> void:
 
 func _on_connected_to_photon() -> void:
 	print("Successfully connected to Photon server as '%s'" % GameSettings.display_name)
-	GlobalEvents.request_menu_close()
-	await GlobalEvents.menu_closed
-	
-	GlobalEvents.request_menu_open(UIDs.Menus[UIDs.Menu.RoomSelect])
+	_change_menu(UIDs.Menu.RoomSelect)
 
 func _on_connection_failed(error: String) -> void:
 	print("Failed to connect to Photon server: %s" % error)
@@ -35,10 +32,14 @@ func _on_connection_status_changed(status: int) -> void:
 	pass
 
 func _on_room_joined() -> void:
-	pass
+	print("Successfully joined room as '%s'" % GameSettings.display_name)
+	_change_menu(UIDs.Menu.GameLobby)
+	GlobalEvents.request_player_creation()
 
 func _on_room_left() -> void:
-	pass
+	print("Left room")
+	GlobalEvents.request_player_deletion()
+	_change_menu(UIDs.Menu.RoomSelect)
 
 #endregion
 
@@ -67,3 +68,10 @@ func _generate_random_code() -> String:
 		code += ROOM_CODE_CHARS[r]
 	
 	return code
+
+## Requests to change the current menu to the given one
+func _change_menu(menu: UIDs.Menu) -> void:
+	GlobalEvents.request_menu_close()
+	await GlobalEvents.menu_closed
+	
+	GlobalEvents.request_menu_open(UIDs.Menus[menu])
