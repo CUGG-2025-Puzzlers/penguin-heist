@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cwj46gene8orx"]
+
+[ext_resource type="Script" uid="uid://16jor8inrx6c" path="res://world/entities/player/player.gd" id="1_qrsrl"]
+
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_qrsrl"]
+property_count = 1
+properties/0/path = NodePath(":display_name")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+
+[node name="Player" type="Node3D" unique_id=1395964812]
+script = ExtResource("1_qrsrl")
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1784188585]
+owner_mode = 1
+replication_config = SubResource("FusionReplicationConfig_qrsrl")
+process_priority = -2147483647
+process_physics_priority = -2147483647
