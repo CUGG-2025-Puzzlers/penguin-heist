@@ -10,3 +10,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pvv55")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1502733558]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 300.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerList" type="VBoxContainer" parent="MarginContainer" unique_id=376669755]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="MarginContainer/PlayerList" unique_id=621886879]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="DisplayNameLabel1" type="Label" parent="MarginContainer/PlayerList" unique_id=2145520022]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Empty"
+
+[node name="DisplayNameLabel2" type="Label" parent="MarginContainer/PlayerList" unique_id=1801371478]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Empty"
+
+[node name="DisplayNameLabel3" type="Label" parent="MarginContainer/PlayerList" unique_id=542643141]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Empty"
+
+[node name="DisplayNameLabel4" type="Label" parent="MarginContainer/PlayerList" unique_id=1784383640]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Empty"

@@ -1,6 +1,11 @@
 extends Menu
 
-
+@onready var _player_list: Array[Label] = [
+	%DisplayNameLabel1,
+	%DisplayNameLabel2,
+	%DisplayNameLabel3,
+	%DisplayNameLabel4
+]
 
 func _ready() -> void:
 	Fusion.player_joined.connect(_on_player_joined)
