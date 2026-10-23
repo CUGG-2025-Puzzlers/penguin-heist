@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ndytlmwu8xmc"]
 
 [ext_resource type="Script" uid="uid://dvfppm0lfnaq1" path="res://common/main/main.gd" id="1_v2ws0"]
+[ext_resource type="PackedScene" uid="uid://cwj46gene8orx" path="res://world/entities/player/player.tscn" id="2_qfc1f"]
 
 [node name="Main" type="Node" unique_id=122788503]
 process_mode = 3
@@ -13,6 +14,13 @@ process_mode = 1
 unique_name_in_owner = true
 
 [node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
+unique_name_in_owner = true
+
+[node name="PlayersRoot" type="Node3D" parent="World" unique_id=2091947652]
+unique_name_in_owner = true
+
+[node name="PlayerSpawner" type="FusionSpawner" parent="World/PlayersRoot" unique_id=1137949214]
+spawnable_scenes = Array[PackedScene]([ExtResource("2_qfc1f")])
 unique_name_in_owner = true
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=744466819]
