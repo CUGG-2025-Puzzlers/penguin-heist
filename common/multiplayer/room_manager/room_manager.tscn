@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://borga3pb20ted"]
+
+[ext_resource type="Script" uid="uid://cqhqrlqm115ye" path="res://common/multiplayer/room_manager/room_manager.gd" id="1_63qab"]
+
+[node name="RoomManager" type="Node" unique_id=1663668876]
+script = ExtResource("1_63qab")
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1235905166]
+owner_mode = 3
+process_priority = -2147483647
+process_physics_priority = -2147483647
