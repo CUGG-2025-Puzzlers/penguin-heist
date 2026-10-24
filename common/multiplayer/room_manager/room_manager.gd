@@ -1,8 +1,8 @@
 class_name RoomManager
 extends Node
 
-const ERROR_DUPLICATE_IDS = "Error adding player to list: A player with the given 
-							ID already exists."
+const ERROR_DUPLICATE_IDS: String = "Error adding player to list: A player with "\
+									+ "the given ID already exists."
 
 var players: Dictionary[int, PlayerInfo]
 

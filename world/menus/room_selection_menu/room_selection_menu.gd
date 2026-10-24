@@ -7,7 +7,7 @@ extends Menu
 @onready var _join_room_button:      Button   = %JoinRoomButton
 @onready var _join_room_error_label: Label    = %JoinErrorLabel
 
-const NO_ERROR = ""
+const NO_ERROR: String = ""
 
 var _creating_room: bool = false
 var _joining_room: bool = false

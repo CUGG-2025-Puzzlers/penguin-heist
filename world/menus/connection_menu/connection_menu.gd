@@ -4,9 +4,9 @@ extends Menu
 @onready var _connect_button:     Button   = %ConnectButton
 @onready var _error_label:        Label    = %ErrorLabel
 
-const NO_ERROR = ""
-const ERROR_INVALID_DISPLAY_NAME = "Display Name is invalid"
-const ERROR_CONNECTION_FAILED    = "Failed to connect to server"
+const NO_ERROR: String = ""
+const ERROR_INVALID_DISPLAY_NAME: String = "Display Name is invalid"
+const ERROR_CONNECTION_FAILED   : String = "Failed to connect to server"
 
 func _ready() -> void:
 	_connect_button.pressed.connect(_on_connect_button_pressed)

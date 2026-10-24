@@ -3,7 +3,7 @@ extends Node
 # This script should handle the local Client's connection
 # It should not worry about remote players joining or leaving
 
-const ROOM_CODE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const ROOM_CODE_CHARS: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func _ready() -> void:
 	# Subscribe to Photon Events
