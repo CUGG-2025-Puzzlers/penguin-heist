@@ -4,7 +4,7 @@
 
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_qrsrl"]
 property_count = 1
-properties/0/path = NodePath(":display_name")
+properties/0/path = NodePath(":info")
 properties/0/max_array_capacity = 0
 properties/0/interface_tag = ""
 properties/0/interpolate = 0
