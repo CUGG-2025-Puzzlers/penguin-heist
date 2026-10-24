@@ -51,14 +51,25 @@ func complete_menu_close() -> void:
 #region Player Spawning
 
 signal player_creation_requested()
-signal player_deletion_requested()
+signal player_created(player_id: int, info: PlayerInfo)
 
 ## Emits a signal that a new player object was requested to be created
 func request_player_creation() -> void:
 	player_creation_requested.emit()
 
+## Emits a signal that a player creation request was completed
+func complete_player_creation(player_id: int, info: PlayerInfo) -> void:
+	player_created.emit(player_id, info)
+
+signal player_deletion_requested()
+signal player_deleted(player_id: int)
+
 ## Emits a signal that an existing player object was requested to be deleted
 func request_player_deletion() -> void:
 	player_deletion_requested.emit()
+
+## Emits a signal that a player deletion request was completed
+func complete_player_deletion(player_id: int) -> void:
+	player_deleted.emit(player_id)
 
 #region
