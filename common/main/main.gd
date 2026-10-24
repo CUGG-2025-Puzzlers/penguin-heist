@@ -51,7 +51,7 @@ func _on_menu_close_requested() -> void:
 ## Creates the root player object
 func _on_player_creation_requested() -> void:
 	print("Accepted player spawn request")
-	var player: Player = _player_spawner.spawn()
+	var player: Player = _player_spawner.spawn() as Player
 
 ## Event Handler for when an existing player object is requested to be deleted
 ## Creates the root player object
