@@ -7,6 +7,11 @@ const ERROR_DUPLICATE_IDS: String = "Error adding player to list: A player with 
 var players: Dictionary[int, PlayerInfo]
 
 func _ready() -> void:
+	Fusion.player_joined.connect(_on_player_joined)
+	pass
+
+func _on_player_joined(player_id: int, user_id: String) -> void:
+	await GlobalEvents.player_created
 	pass
 
 ## Adds the given player's info to the room's player list
