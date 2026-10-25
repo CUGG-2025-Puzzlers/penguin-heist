@@ -12,6 +12,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq8a6"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6v6b"]
+
 [node name="Entrance" type="Node3D" unique_id=510669196]
 
 [node name="ProtoController" parent="." unique_id=1263997072 instance=ExtResource("1_8s5ki")]
@@ -21,13 +23,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.3, 23.9)
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1823755738]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.15, -1, 22)
-size = Vector3(18, 1, 16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.114355, -1, 24.717224)
+size = Vector3(18.07129, 1, 21.434448)
 material = SubResource("StandardMaterial3D_8s5ki")
 
 [node name="Ceiling" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1340511562]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-size = Vector3(40, 1, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.049744, 3, 21.958252)
+size = Vector3(17.900513, 1, 16.083496)
 material = SubResource("StandardMaterial3D_8s5ki")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1502044130]
@@ -75,6 +77,11 @@ material = SubResource("StandardMaterial3D_sontw")
 transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 5.258579, 0, 23.588732)
 material = SubResource("StandardMaterial3D_sontw")
 
+[node name="Snow Pile" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1182219038]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 5.005892, -0.2707517, 32.68432)
+size = Vector3(1.8000001, 0.4584961, 2.0558472)
+material = SubResource("StandardMaterial3D_sontw")
+
 [node name="ATM1" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1359797714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3999996, 0.8000001, 19.8)
 size = Vector3(1, 2.6000001, 1.4)
@@ -84,6 +91,11 @@ material = SubResource("StandardMaterial3D_pq8a6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3999996, 0.8000001, 16.5)
 size = Vector3(1, 2.6000001, 1.4)
 material = SubResource("StandardMaterial3D_pq8a6")
+
+[node name="CCTV" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1496994491]
+transform = Transform3D(0.76604444, -0.4131759, 0.49240384, 0, 0.76604444, 0.6427876, -0.6427876, -0.4924039, 0.5868241, 18.99143, 2.2011094, 28.824411)
+size = Vector3(0.3, 0.3, 0.5)
+material = SubResource("StandardMaterial3D_l6v6b")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=353233191]
 transform = Transform3D(0.8660254, 0.3213938, -0.38302225, 0, 0.7660445, 0.6427876, 0.5, -0.55667037, 0.663414, 0, 12.2, 0)
