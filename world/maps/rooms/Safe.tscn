@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://cj0ekuw6lhlf1"]
+[gd_scene format=3 uid="uid://cggb381w5poes"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_b7yed"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sontw"]
+albedo_color = Color(0.82, 0.82, 0.82, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj6nr"]
 albedo_color = Color(0, 0.7294118, 0, 1)
@@ -10,6 +13,9 @@ albedo_color = Color(0, 0.5019608, 0.7254902, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsqha"]
 albedo_color = Color(0.8392157, 0.8901961, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1pxy"]
+albedo_color = Color(0.3526, 0.3602533, 0.41, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8s5ki"]
 
@@ -34,6 +40,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.3, 21.8)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=484807707]
 use_collision = true
+
+[node name="Vault Door4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=301569810]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8, 0.8499999, 26.325)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
+
+[node name="Vault Door5" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=736942564]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8, 0.85, 21.725)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
+
+[node name="Vault Door6" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=232877074]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8, 0.85, 17.525)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
+
+[node name="Vault Door7" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1812477643]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.9, 0.84999996, 26.325)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
+
+[node name="Vault Door8" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=991446355]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.9, 0.85, 21.725)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
+
+[node name="Vault Door9" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1307577674]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.9, 0.85, 17.525)
+radius = 1.2
+height = 1.25
+sides = 16
+material = SubResource("StandardMaterial3D_sontw")
 
 [node name="Stack of cash" type="CSGBox3D" parent="CSGCombiner3D" unique_id=39811807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7643557, 0, 17.2)
@@ -61,9 +109,9 @@ size = Vector3(1.5, 0.5, 2)
 material = SubResource("StandardMaterial3D_tsqha")
 
 [node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1823755738]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.114355, -1, 22)
-size = Vector3(18.07129, 1, 16)
-material = SubResource("StandardMaterial3D_8s5ki")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.799999, -1, 21.75)
+size = Vector3(19.5, 1, 16.300001)
+material = SubResource("StandardMaterial3D_m1pxy")
 
 [node name="Ceiling" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1340511562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.049744, 3, 21.958252)
@@ -136,6 +184,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7500005, -9.800001, -0.149
 size = Vector3(5.1, 0.2, 3.1000001)
 material = SubResource("StandardMaterial3D_sgdt2")
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1189058526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, -5.5, -0.14999962)
+size = Vector3(5.1, 0.2, 3.1000001)
+material = SubResource("StandardMaterial3D_sgdt2")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1467579898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, -9.800001, -0.14999938)
+size = Vector3(5.1, 0.2, 3.1000001)
+material = SubResource("StandardMaterial3D_sgdt2")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=362234040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, -7.800001, 0.9000006)
 material = SubResource("StandardMaterial3D_f5pyx")
@@ -174,123 +232,63 @@ transform = Transform3D(0.76604444, -0.4131759, 0.49240384, 0, 0.76604444, 0.642
 size = Vector3(0.3, 0.3, 0.5)
 material = SubResource("StandardMaterial3D_l6v6b")
 
-[node name="LightsRow1" type="Node3D" parent="." unique_id=319850313]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 26.100002)
-visible = false
+[node name="RoomLights" type="Node3D" parent="." unique_id=801417397]
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="LightsRow1" unique_id=349828695]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 6, 2.4, 0)
+[node name="LeftVaultFront" type="SpotLight3D" parent="RoomLights" unique_id=939791631]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.4, 2.6, 17.5)
 light_size = 0.1
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="LightsRow1" unique_id=512161852]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 9, 2.4, 0)
+[node name="LeftVaultMiddle" type="SpotLight3D" parent="RoomLights" unique_id=762813465]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.4, 2.6, 21.8)
 light_size = 0.1
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="LightsRow1" unique_id=2055051538]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 12, 2.4, 0)
+[node name="LeftVaultRear" type="SpotLight3D" parent="RoomLights" unique_id=1466401763]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.4, 2.6, 26.2)
 light_size = 0.1
 shadow_enabled = true
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="LightsRow1" unique_id=2052857043]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 15, 2.4, 0)
+[node name="RightVaultFront" type="SpotLight3D" parent="RoomLights" unique_id=869126526]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 16.5, 2.6, 17.5)
 light_size = 0.1
 shadow_enabled = true
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="LightsRow2" type="Node3D" parent="." unique_id=1963274692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.100002)
-visible = false
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="LightsRow2" unique_id=1432806901]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 6, 2.4, 0)
+[node name="RightVaultMiddle" type="SpotLight3D" parent="RoomLights" unique_id=2137946360]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 16.5, 2.6, 21.8)
 light_size = 0.1
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="LightsRow2" unique_id=1245277596]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 9, 2.4, 0)
+[node name="RightVaultRear" type="SpotLight3D" parent="RoomLights" unique_id=775102441]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 16.5, 2.6, 26.2)
 light_size = 0.1
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
+spot_range = 3.6
+spot_attenuation = 2.0
+spot_angle = 48.0
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="LightsRow2" unique_id=890928969]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 12, 2.4, 0)
+[node name="CentralCorridor" type="SpotLight3D" parent="RoomLights" unique_id=1911438872]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 11, 2.6, 22)
 light_size = 0.1
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="LightsRow2" unique_id=61684756]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 15, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 2.0
-
-[node name="LightsRow3" type="Node3D" parent="." unique_id=1028172251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.100002)
-visible = false
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="LightsRow3" unique_id=1212533699]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 6, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="LightsRow3" unique_id=845660421]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 9, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="LightsRow3" unique_id=836582824]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 12, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="LightsRow3" unique_id=357823549]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 15, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="LightsRow4" type="Node3D" parent="." unique_id=1973573251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.100002)
-visible = false
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="LightsRow4" unique_id=959631172]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 6, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="LightsRow4" unique_id=1723928584]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 9, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="LightsRow4" unique_id=407594613]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 12, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="LightsRow4" unique_id=1237486425]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 15, 2.4, 0)
-light_size = 0.1
-shadow_enabled = true
-omni_attenuation = 2.0
+spot_range = 4.0
+spot_attenuation = 2.0
+spot_angle = 62.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=395338415]
 environment = SubResource("Environment_b7yed")
