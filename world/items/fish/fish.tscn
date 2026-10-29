@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dju1e2uxrvme3" path="res://world/items/fish/Fish by Poly by Google - aEyLrUMMoUK.glb" id="1_np3ai"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sontw"]
-size = Vector3(0.1, 0.2, 0.6)
+size = Vector3(0.1, 0.2, 0.8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sontw"]
 
@@ -12,10 +12,10 @@ size = Vector3(0.1, 0.2, 0.6)
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=639482560]
 
 [node name="Fish by Poly by Google - aEyLrUMMoUK" parent="RigidBody3D" unique_id=1622420260 instance=ExtResource("1_np3ai")]
-transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, 0, 0, 0)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=976540684]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016357452, -2.9802322e-08, -0.013623059)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016357452, -2.9802322e-08, -0.013623089)
 shape = SubResource("BoxShape3D_sontw")
 
 [node name="Unit Box (for scale)" type="CSGBox3D" parent="." unique_id=294685122]
