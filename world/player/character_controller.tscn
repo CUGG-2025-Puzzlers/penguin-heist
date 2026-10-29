@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c6mor2d4870ba"]
+
+[ext_resource type="Script" uid="uid://devttgmosotk1" path="res://world/player/character_controller.gd" id="1_7er00"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_htm54"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1fwb4"]
+
+[node name="CharacterController" type="Node3D" unique_id=1436483759]
+script = ExtResource("1_7er00")
+
+[node name="ProtoController" parent="." unique_id=1263997072 instance=ExtResource("2_htm54")]
+can_sprint = true
+
+[node name="HUD" type="Control" parent="ProtoController/Head/Camera3D" parent_id_path=PackedInt32Array(1263997072, 1087492476) index="0" unique_id=837240019]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -1.0
+offset_right = 40.0
+offset_bottom = 39.0
+
+[node name="Crosshair" type="TextureRect" parent="ProtoController/Head/Camera3D/HUD" unique_id=977207054]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 314.0
+offset_right = 586.0
+offset_bottom = 334.0
+texture = SubResource("CanvasTexture_1fwb4")
+
+[editable path="ProtoController"]
