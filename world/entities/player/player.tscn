@@ -4,7 +4,7 @@
 
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_qrsrl"]
 property_count = 1
-properties/0/path = NodePath(":info")
+properties/0/path = NodePath(":display_name")
 properties/0/max_array_capacity = 0
 properties/0/interface_tag = ""
 properties/0/interpolate = 0
@@ -17,5 +17,6 @@ script = ExtResource("1_qrsrl")
 [node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1784188585]
 owner_mode = 1
 replication_config = SubResource("FusionReplicationConfig_qrsrl")
+unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
