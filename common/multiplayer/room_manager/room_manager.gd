@@ -22,8 +22,10 @@ func add_player_to_list(player_id: int, display_name: String) -> void:
 	
 	print("Adding '%s' to player list" % display_name)
 	players[player_id] = display_name
+	GlobalEvents.complete_player_list_update()
 
 ## Removes the given player from the player list
 func remove_player_from_list(player_id: int) -> void:
 	print("Removing '%s' from player list" % players[player_id])
 	players.erase(player_id)
+	GlobalEvents.complete_player_list_update()

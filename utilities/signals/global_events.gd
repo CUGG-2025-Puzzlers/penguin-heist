@@ -73,3 +73,13 @@ func complete_player_deletion(player_id: int) -> void:
 	player_deleted.emit(player_id)
 
 #endregion
+
+#region Room Management
+
+signal player_list_updated()
+
+## Emits a signal that the player list for a room has been updated
+func complete_player_list_update() -> void:
+	player_list_updated.emit()
+
+#endregion
