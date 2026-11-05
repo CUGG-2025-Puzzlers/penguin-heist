@@ -56,8 +56,8 @@ func snowballThrow():
 		canThrow = false
 		$ProtoController/item_use_timer.start()
 		
-		var force = -18
-		var upDirection = 3.5
+		var force = -0.5
+		var upDirection = 0.05
 		
 		var playerRotation = $ProtoController/Head.global_transform.basis.z.normalized()
 		
