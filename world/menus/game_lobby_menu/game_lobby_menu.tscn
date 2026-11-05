@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://b2wpsmtwpciir"]
+
+[ext_resource type="Script" uid="uid://dobjp6lqqjsce" path="res://world/menus/game_lobby_menu/game_lobby_menu.gd" id="1_pvv55"]
+[ext_resource type="PackedScene" uid="uid://c7jkojsu8mb3c" path="res://world/menus/display_name_label.tscn" id="2_jf84x"]
+
+[node name="GameLobbyMenu" type="Control" unique_id=1440051536]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pvv55")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1502733558]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 300.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerList" type="VBoxContainer" parent="MarginContainer" unique_id=376669755]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="MarginContainer/PlayerList" unique_id=621886879]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="DisplayNameLabelSpawner" type="FusionSpawner" parent="MarginContainer/PlayerList" unique_id=1041266921]
+spawnable_scenes = Array[PackedScene]([ExtResource("2_jf84x")])
+unique_name_in_owner = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=911782052]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RoomCodeLabel" type="Label" parent="MarginContainer2" unique_id=2032770027]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Not In Room..."
+horizontal_alignment = 1
+vertical_alignment = 1

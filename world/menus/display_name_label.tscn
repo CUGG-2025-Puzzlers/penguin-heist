@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c7jkojsu8mb3c"]
+
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_qbb4r"]
+property_count = 1
+properties/0/path = NodePath(":text")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+
+[node name="DisplayNameLabel" type="Label" unique_id=166166333]
+text = "Empty"
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=2081416186]
+owner_mode = 1
+replication_config = SubResource("FusionReplicationConfig_qbb4r")
+process_priority = -2147483647
+process_physics_priority = -2147483647

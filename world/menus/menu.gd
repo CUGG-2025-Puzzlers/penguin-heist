@@ -1,3 +1,3 @@
 @abstract
 class_name Menu
-extends Node
+extends Control

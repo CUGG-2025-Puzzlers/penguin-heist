@@ -15,6 +15,12 @@ unique_name_in_owner = true
 [node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
 unique_name_in_owner = true
 
+[node name="PlayersRoot" type="Node3D" parent="World" unique_id=2091947652]
+unique_name_in_owner = true
+
+[node name="PlayerSpawner" type="FusionSpawner" parent="World/PlayersRoot" unique_id=1137949214]
+unique_name_in_owner = true
+
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=744466819]
 process_mode = 1
 

@@ -11,17 +11,25 @@ config_version=5
 [application]
 
 config/name="Penguin Heist"
+run/main_scene="uid://ndytlmwu8xmc"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+GameSettings="*uid://ce5nduykx84ec"
 GlobalEvents="*uid://cq1o6bk2jxsyc"
+ConnectionManager="*uid://25pc452dsh8b"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[fusion]
+
+connection/app_id="6cf5a1a0-d173-46e3-a010-8af6cbd0ea23"
+connection/app_version="0.1"
 
 [physics]
 
