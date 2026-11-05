@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://devttgmosotk1" path="res://world/player/character_controller.gd" id="1_7er00"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_htm54"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1fwb4"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_7er00"]
 
 [node name="CharacterController" type="Node3D" unique_id=1436483759]
 script = ExtResource("1_7er00")
@@ -24,11 +24,20 @@ offset_left = 566.0
 offset_top = 314.0
 offset_right = 586.0
 offset_bottom = 334.0
-texture = SubResource("CanvasTexture_1fwb4")
+mouse_filter = 2
+texture = SubResource("CanvasTexture_7er00")
 
 [node name="InteractRay" type="RayCast3D" parent="ProtoController/Head/Camera3D" parent_id_path=PackedInt32Array(1263997072, 1087492476) index="1" unique_id=1185292218]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -3)
 collide_with_areas = true
+
+[node name="snowballpos" type="Marker3D" parent="ProtoController/Head" parent_id_path=PackedInt32Array(1263997072, 1791332881) index="1" unique_id=1043207918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
+
+[node name="item_use_timer" type="Timer" parent="ProtoController" unique_id=423784113]
+wait_time = 2.0
+
+[connection signal="timeout" from="ProtoController/item_use_timer" to="." method="_on_item_use_timer_timeout"]
 
 [editable path="ProtoController"]
