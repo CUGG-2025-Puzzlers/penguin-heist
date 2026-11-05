@@ -21,8 +21,6 @@ func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
-	GlobalEvents.player_creation_requested.connect(_on_player_creation_requested)
-	GlobalEvents.player_deletion_requested.connect(_on_player_deletion_requested)
 	
 	# TODO: Load main menu when not debugging
 	_load_menu(UIDs.Menus[UIDs.Menu.Connection])
@@ -46,17 +44,6 @@ func _on_menu_open_requested(menu_uid: String) -> void:
 func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
-
-## Event Handler for when a new player object is requested to be created
-## Creates the root player object
-func _on_player_creation_requested() -> void:
-	print("Accepted player spawn request")
-	var player: Player = _player_spawner.spawn() as Player
-
-## Event Handler for when an existing player object is requested to be deleted
-## Creates the root player object
-func _on_player_deletion_requested() -> void:
-	pass
 
 #endregion
 

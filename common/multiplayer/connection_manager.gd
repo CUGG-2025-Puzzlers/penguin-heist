@@ -45,7 +45,6 @@ func _on_room_joined() -> void:
 	
 	_create_room_manager()
 	_change_menu(UIDs.Menu.GameLobby)
-	GlobalEvents.request_player_creation()
 
 func _on_room_left() -> void:
 	print("Left room")
