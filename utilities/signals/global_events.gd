@@ -47,13 +47,3 @@ func complete_menu_close() -> void:
 	menu_closed.emit()
 
 #endregion
-
-#region Room Management
-
-signal player_list_updated()
-
-## Emits a signal that the player list for a room has been updated
-func complete_player_list_update() -> void:
-	player_list_updated.emit()
-
-#endregion
