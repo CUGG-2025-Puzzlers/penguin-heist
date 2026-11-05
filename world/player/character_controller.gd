@@ -3,8 +3,15 @@ extends Node3D
 
 var current_interactable = null
 
+var canThrow = true
+
+var snowball = preload("res://world/items/snowball/snowball.tscn")
+
+
 func _physics_process(delta):
 	check_hover_collision()
+	
+	snowballThrow()
 
 func check_hover_collision():
 	if raycast.is_colliding():
@@ -24,3 +31,24 @@ func hide_current_prompt():
 	if current_interactable:
 		current_interactable.hide_prompt()
 		current_interactable = null
+
+
+func snowballThrow():
+	if Input.is_action_just_released("input_throw") && canThrow:
+		var snowballins = snowball.instantiate()
+		snowballins.position = $ProtoController/Head/snowballpos.global_position
+		get_tree().current_scene.add_child(snowballins)
+		
+		canThrow = false
+		$ProtoController/item_use_timer.start()
+		
+		var force = -18
+		var upDirection = 3.5
+		
+		var playerRotation = $ProtoController/Head.global_transform.basis.z.normalized()
+		
+		snowballins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
+
+
+func _on_item_use_timer_timeout():
+	canThrow = true
