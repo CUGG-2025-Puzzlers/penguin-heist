@@ -1,0 +1,159 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_sec01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.3526, 0.3602533, 0.41, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_desk1"]
+albedo_color = Color(0.45, 0.45, 0.48, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chair"]
+albedo_color = Color(0.12, 0.12, 0.14, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scrn1"]
+albedo_color = Color(0.05, 0.1, 0.15, 1)
+emission_enabled = true
+emission = Color(0.35, 0.65, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lockr"]
+albedo_color = Color(0.25, 0.32, 0.42, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cctv1"]
+
+[sub_resource type="Environment" id="Environment_sec01"]
+ambient_light_source = 2
+ambient_light_color = Color(0.93536365, 0.93359303, 0.97938424, 1)
+ambient_light_energy = 0.4
+
+[node name="Security" type="Node3D" unique_id=1738204561]
+
+[node name="ProtoController" parent="." unique_id=902617334 instance=ExtResource("1_sec01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.3, 24.5)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1460931827]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=377120548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, 22)
+size = Vector3(12, 1, 10)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Ceiling" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1829407713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 22)
+size = Vector3(12, 1, 10)
+material = SubResource("StandardMaterial3D_wall1")
+
+[node name="NorthWall" type="CSGBox3D" parent="CSGCombiner3D" unique_id=650283914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 17.5)
+size = Vector3(12, 3, 1)
+material = SubResource("StandardMaterial3D_wall1")
+
+[node name="SouthWall" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1205738460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 26.5)
+size = Vector3(12, 3, 1)
+material = SubResource("StandardMaterial3D_wall1")
+
+[node name="WestWall" type="CSGBox3D" parent="CSGCombiner3D" unique_id=488615027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, 22)
+size = Vector3(1, 3, 10)
+material = SubResource("StandardMaterial3D_wall1")
+
+[node name="EastWall" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1592846301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 1, 22)
+size = Vector3(1, 3, 10)
+material = SubResource("StandardMaterial3D_wall1")
+
+[node name="Door Hole" type="CSGBox3D" parent="CSGCombiner3D" unique_id=263951784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.79999995, 26.5)
+operation = 2
+size = Vector3(2.5, 2.6000001, 1.1)
+material = SubResource("StandardMaterial3D_door1")
+
+[node name="Desk" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1114093652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 19)
+size = Vector3(6, 1, 1.4)
+material = SubResource("StandardMaterial3D_desk1")
+
+[node name="Guard Chair" type="CSGBox3D" parent="CSGCombiner3D" unique_id=741802395]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 11.3, -0.2, 20.6)
+size = Vector3(0.8, 0.6, 0.8)
+material = SubResource("StandardMaterial3D_chair")
+
+[node name="Monitor1" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1987402316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Monitor2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=530174829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Monitor3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1376520948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Monitor4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=884215067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Monitor5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1641093270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Monitor6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=209738154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2.05, 18.05)
+size = Vector3(1.6, 0.9, 0.1)
+material = SubResource("StandardMaterial3D_scrn1")
+
+[node name="Locker1" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1530847726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, 0.5, 23.5)
+size = Vector3(0.8, 2, 0.9)
+material = SubResource("StandardMaterial3D_lockr")
+
+[node name="Locker2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=673902158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9, 0.5, 24.5)
+size = Vector3(0.8, 2, 0.9)
+material = SubResource("StandardMaterial3D_lockr")
+
+[node name="CCTV" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1093746285]
+transform = Transform3D(0.76604444, -0.4131759, 0.49240384, 0, 0.76604444, 0.6427876, -0.6427876, -0.4924039, 0.5868241, 15.6, 2.2, 25.6)
+size = Vector3(0.3, 0.3, 0.5)
+material = SubResource("StandardMaterial3D_cctv1")
+
+[node name="RoomLights" type="Node3D" parent="." unique_id=1268450397]
+
+[node name="CeilingFront" type="OmniLight3D" parent="RoomLights" unique_id=455019382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.4, 20)
+light_energy = 0.6
+light_size = 0.1
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 2.0
+
+[node name="CeilingBack" type="OmniLight3D" parent="RoomLights" unique_id=1904728563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.4, 24)
+light_energy = 0.6
+light_size = 0.1
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 2.0
+
+[node name="MonitorGlow" type="OmniLight3D" parent="RoomLights" unique_id=812374095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.5, 18.8)
+light_color = Color(0.45, 0.7, 1, 1)
+light_energy = 0.8
+omni_range = 4.0
+omni_attenuation = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357902468]
+environment = SubResource("Environment_sec01")
