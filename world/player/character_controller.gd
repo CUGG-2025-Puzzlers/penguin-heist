@@ -7,6 +7,10 @@ var canThrow = true
 
 var snowball = preload("res://world/items/snowball/snowball.tscn")
 
+var cursor_locked = true
+
+var held_fish = null
+var slapping = false
 
 func _physics_process(delta):
 	check_hover_collision()
@@ -14,18 +18,23 @@ func _physics_process(delta):
 	snowballThrow()
 
 func check_hover_collision():
+	var item = null
+
 	if raycast.is_colliding():
-		var hover_collider = raycast.get_collider()
-		if hover_collider and is_instance_valid(hover_collider) and hover_collider.has_method("interact") and hover_collider.has_method("show_prompt"):
-			if current_interactable != hover_collider:
-				if current_interactable:
-					current_interactable.hide_prompt()
-				current_interactable = hover_collider
-				current_interactable.show_prompt()
-		else:
-			hide_current_prompt()
-	else:
+		var collider = raycast.get_collider()
+
+		if collider:
+			item = collider.get_parent()
+
+			if not item.has_method("interact"):
+				item = null
+
+	if item != current_interactable:
 		hide_current_prompt()
+
+		if item:
+			current_interactable = item
+			current_interactable.show_prompt()
 
 func hide_current_prompt():
 	if current_interactable:
@@ -34,6 +43,11 @@ func hide_current_prompt():
 
 
 func snowballThrow():
+	if held_fish:
+		if Input.is_action_just_released("input_throw"):
+			slap()
+		return
+
 	if Input.is_action_just_released("input_throw") && canThrow:
 		var snowballins = snowball.instantiate()
 		snowballins.position = $ProtoController/Head/snowballpos.global_position
@@ -49,6 +63,48 @@ func snowballThrow():
 		
 		snowballins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
 
-
 func _on_item_use_timer_timeout():
 	canThrow = true
+
+
+func activate():
+	if held_fish:
+		held_fish.drop()
+		held_fish = null
+		return
+
+	if not raycast.is_colliding():
+		return
+
+	var hit = raycast.get_collider()
+	if hit == null:
+		return
+
+	var item = hit.get_parent()
+	if item and item.has_method("pick_up"):
+		hide_current_prompt()
+		held_fish = item
+		item.pick_up($ProtoController/Head/Camera3D)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("interact"):
+		activate()
+
+
+func slap():
+	if slapping:
+		return
+
+	slapping = true
+	var swing = create_tween()
+	swing.tween_property(held_fish, "rotation_degrees:y", 180.0 + 65.0, 0.10)
+	swing.tween_property(held_fish, "rotation_degrees:y", 180.0, 0.18)
+
+	raycast.force_raycast_update()
+	var target = raycast.get_collider()
+
+	if target is RigidBody3D and raycast.global_position.distance_to(raycast.get_collision_point()) < 2.5:
+		target.apply_central_impulse(-raycast.global_basis.z * 8.0)
+
+	await swing.finished
+	slapping = false
