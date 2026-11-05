@@ -32,3 +32,25 @@ horizontal_alignment = 1
 [node name="DisplayNameLabelSpawner" type="FusionSpawner" parent="MarginContainer/PlayerList" unique_id=1041266921]
 spawnable_scenes = Array[PackedScene]([ExtResource("2_jf84x")])
 unique_name_in_owner = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=911782052]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RoomCodeLabel" type="Label" parent="MarginContainer2" unique_id=2032770027]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Not In Room..."
+horizontal_alignment = 1
+vertical_alignment = 1
