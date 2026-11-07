@@ -44,11 +44,11 @@ func hide_current_prompt():
 
 func snowballThrow():
 	if held_fish:
-		if Input.is_action_just_released("input_throw"):
+		if Input.is_action_just_pressed("input_throw"):
 			slap()
 		return
 
-	if Input.is_action_just_released("input_throw") && canThrow:
+	if Input.is_action_just_pressed("input_throw") && canThrow:
 		var snowballins = snowball.instantiate()
 		snowballins.position = $ProtoController/Head/snowballpos.global_position
 		get_tree().current_scene.add_child(snowballins)
