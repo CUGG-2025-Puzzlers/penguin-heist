@@ -1,6 +1,8 @@
 extends Node3D
 @onready var raycast = %InteractRay
 
+signal timeout()
+
 var current_interactable = null
 
 var can_throw = true
@@ -11,6 +13,9 @@ var cursor_locked = true
 
 var held_fish = null
 var slapping = false
+
+func _ready():
+	timeout.connect(_on_item_use_timer_timeout)
 
 func _physics_process(delta):
 	check_hover_collision()

@@ -68,5 +68,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 [node name="item_use_timer" type="Timer" parent="ProtoController" unique_id=423784113]
 unique_name_in_owner = true
 wait_time = 2.0
-
-[connection signal="timeout" from="ProtoController/item_use_timer" to="." method="_on_item_use_timer_timeout"]
