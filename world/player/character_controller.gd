@@ -3,7 +3,7 @@ extends Node3D
 
 var current_interactable = null
 
-var canThrow = true
+var can_throw = true
 
 var snowball = preload("res://world/items/snowball/snowball.tscn")
 
@@ -15,7 +15,7 @@ var slapping = false
 func _physics_process(delta):
 	check_hover_collision()
 	
-	snowballThrow()
+	snowball_throw()
 
 func check_hover_collision():
 	var item = null
@@ -42,29 +42,29 @@ func hide_current_prompt():
 		current_interactable = null
 
 
-func snowballThrow():
+func snowball_throw():
 	if held_fish:
 		if Input.is_action_just_pressed("input_throw"):
 			slap()
 		return
 
-	if Input.is_action_just_pressed("input_throw") && canThrow:
+	if Input.is_action_just_pressed("input_throw") && can_throw:
 		var snowballins = snowball.instantiate()
-		snowballins.position = $ProtoController/Head/snowballpos.global_position
+		snowballins.position = %snowballpos.global_position
 		get_tree().current_scene.add_child(snowballins)
 		
-		canThrow = false
-		$ProtoController/item_use_timer.start()
+		can_throw = false
+		%item_use_timer.start()
 		
 		var force = -0.5
 		var upDirection = 0.05
 		
-		var playerRotation = $ProtoController/Head.global_transform.basis.z.normalized()
+		var playerRotation = %Head.global_transform.basis.z.normalized()
 		
 		snowballins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
 
 func _on_item_use_timer_timeout():
-	canThrow = true
+	can_throw = true
 
 
 func activate():
@@ -84,7 +84,7 @@ func activate():
 	if item and item.has_method("pick_up"):
 		hide_current_prompt()
 		held_fish = item
-		item.pick_up($ProtoController/Head/Camera3D)
+		item.pick_up(%Head/Camera3D)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
