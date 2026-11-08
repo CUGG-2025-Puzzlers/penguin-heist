@@ -107,7 +107,7 @@ func slap():
 	swing.tween_property(held_fish, "rotation_degrees:y", 180.0 + 65.0, 0.10)
 	swing.tween_property(held_fish, "rotation_degrees:y", 180.0, 0.18)
 
-	_raycast.force__raycast_update()
+	_raycast.force_raycast_update()
 	var target = _raycast.get_collider()
 
 	if target is RigidBody3D and _raycast.global_position.distance_to(_raycast.get_collision_point()) < 2.5:
