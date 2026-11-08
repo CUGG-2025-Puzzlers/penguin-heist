@@ -37,17 +37,18 @@ shape = SubResource("CapsuleShape3D_iof21")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="Camera3D" type="Camera3D" parent="ProtoController/Head" unique_id=1087492476]
+[node name="PlayerCamera" type="Camera3D" parent="ProtoController/Head" unique_id=1087492476]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29999995, 0)
 
-[node name="HUD" type="Control" parent="ProtoController/Head/Camera3D" unique_id=837240019]
+[node name="HUD" type="Control" parent="ProtoController/Head/PlayerCamera" unique_id=837240019]
 layout_mode = 3
 anchors_preset = 0
 offset_top = -1.0
 offset_right = 40.0
 offset_bottom = 39.0
 
-[node name="Crosshair" type="TextureRect" parent="ProtoController/Head/Camera3D/HUD" unique_id=977207054]
+[node name="Crosshair" type="TextureRect" parent="ProtoController/Head/PlayerCamera/HUD" unique_id=977207054]
 layout_mode = 0
 offset_left = 566.0
 offset_top = 314.0
@@ -56,15 +57,15 @@ offset_bottom = 334.0
 mouse_filter = 2
 texture = SubResource("CanvasTexture_7er00")
 
-[node name="InteractRay" type="RayCast3D" parent="ProtoController/Head/Camera3D" unique_id=1185292218]
+[node name="InteractRay" type="RayCast3D" parent="ProtoController/Head/PlayerCamera" unique_id=1185292218]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collide_with_areas = true
 
-[node name="snowballpos" type="Marker3D" parent="ProtoController/Head" unique_id=1043207918]
+[node name="SnowballPos" type="Marker3D" parent="ProtoController/Head" unique_id=1043207918]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 
-[node name="item_use_timer" type="Timer" parent="ProtoController" unique_id=423784113]
+[node name="ItemUseTimer" type="Timer" parent="ProtoController" unique_id=423784113]
 unique_name_in_owner = true
 wait_time = 2.0

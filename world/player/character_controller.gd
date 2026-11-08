@@ -1,7 +1,9 @@
 extends Node3D
-@onready var raycast = %InteractRay
-
-signal timeout()
+@onready var _raycast : RayCast3D = %InteractRay
+@onready var _snowball_pos : Marker3D = %SnowballPos
+@onready var _item_use_timer : Timer = %ItemUseTimer
+@onready var _head : Node3D = %Head
+@onready var _player_camera : Camera3D = %PlayerCamera
 
 var current_interactable = null
 
@@ -25,8 +27,8 @@ func _physics_process(delta):
 func check_hover_collision():
 	var item = null
 
-	if raycast.is_colliding():
-		var collider = raycast.get_collider()
+	if _raycast.is_colliding():
+		var collider = _raycast.get_collider()
 
 		if collider:
 			item = collider.get_parent()
@@ -54,21 +56,21 @@ func snowball_throw():
 		return
 
 	if Input.is_action_just_pressed("input_throw") && can_throw:
-		var snowballins = snowball.instantiate()
-		snowballins.position = %snowballpos.global_position
-		get_tree().current_scene.add_child(snowballins)
+		var snowball_ins = snowball.instantiate()
+		snowball_ins.position = _snowball_pos.global_position
+		get_tree().current_scene.add_child(snowball_ins)
 		
 		can_throw = false
-		%item_use_timer.start()
+		_item_use_timer.start()
 		
 		var force = -0.5
 		var upDirection = 0.05
 		
-		var playerRotation = %Head.global_transform.basis.z.normalized()
+		var playerRotation = _head.global_transform.basis.z.normalized()
 		
-		snowballins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
+		snowball_ins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
 
-func _on_item_use_timer_timeout():
+func _on_ItemUseTimer_timeout():
 	can_throw = true
 
 
@@ -78,10 +80,10 @@ func activate():
 		held_fish = null
 		return
 
-	if not raycast.is_colliding():
+	if not _raycast.is_colliding():
 		return
 
-	var hit = raycast.get_collider()
+	var hit = _raycast.get_collider()
 	if hit == null:
 		return
 
@@ -89,7 +91,7 @@ func activate():
 	if item and item.has_method("pick_up"):
 		hide_current_prompt()
 		held_fish = item
-		item.pick_up(%Head/Camera3D)
+		item.pick_up(_player_camera)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
@@ -105,11 +107,11 @@ func slap():
 	swing.tween_property(held_fish, "rotation_degrees:y", 180.0 + 65.0, 0.10)
 	swing.tween_property(held_fish, "rotation_degrees:y", 180.0, 0.18)
 
-	raycast.force_raycast_update()
-	var target = raycast.get_collider()
+	_raycast.force__raycast_update()
+	var target = _raycast.get_collider()
 
-	if target is RigidBody3D and raycast.global_position.distance_to(raycast.get_collision_point()) < 2.5:
-		target.apply_central_impulse(-raycast.global_basis.z * 8.0)
+	if target is RigidBody3D and _raycast.global_position.distance_to(_raycast.get_collision_point()) < 2.5:
+		target.apply_central_impulse(-_raycast.global_basis.z * 8.0)
 
 	await swing.finished
 	slapping = false
