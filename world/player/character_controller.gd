@@ -15,7 +15,7 @@ var held_fish = null
 var slapping = false
 
 func _ready():
-	timeout.connect(_on_item_use_timer_timeout)
+	_item_use_timer.timeout.connect(_on_ItemUseTimer_timeout)
 
 func _physics_process(delta):
 	check_hover_collision()
