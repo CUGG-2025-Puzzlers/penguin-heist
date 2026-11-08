@@ -5,16 +5,12 @@ extends Node3D
 @onready var body: RigidBody3D = $RigidBody3D
 var old_layer: int
 var old_mask: int
-
-func interact():
-	queue_free()
 	
 func show_prompt():
 	prompt.visible = true
 	
 func hide_prompt():
 	prompt.visible = false
-
 
 func pick_up(camera: Camera3D):
 	prompt.hide()
