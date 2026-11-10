@@ -28,9 +28,10 @@ height = 1.8
 [node name="CharacterController" type="Node3D" unique_id=1436483759]
 script = ExtResource("1_7er00")
 
-[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
+[node name="PlayerReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
 owner_mode = 1
 replication_config = SubResource("FusionReplicationConfig_7er00")
+unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
 

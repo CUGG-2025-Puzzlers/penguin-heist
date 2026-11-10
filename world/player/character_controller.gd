@@ -1,9 +1,11 @@
 extends Node3D
-@onready var _raycast : RayCast3D = %InteractRay
-@onready var _snowball_pos : Marker3D = %SnowballPos
-@onready var _item_use_timer : Timer = %ItemUseTimer
-@onready var _head : Node3D = %Head
-@onready var _player_camera : Camera3D = %PlayerCamera
+
+@onready var _head          : Node3D    = %Head
+@onready var _player_camera : Camera3D  = %PlayerCamera
+@onready var _raycast       : RayCast3D = %InteractRay
+@onready var _snowball_pos  : Marker3D  = %SnowballPos
+@onready var _item_use_timer: Timer     = %ItemUseTimer
+@onready var _replicator    : FusionSharedReplicator = %PlayerReplicator
 
 var current_interactable = null
 
