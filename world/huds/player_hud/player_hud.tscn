@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgftc5o2kqmr6"]
 
 [ext_resource type="Texture2D" uid="uid://cnerwgng75n40" path="res://world/huds/crosshair.png" id="1_gvqda"]
+[ext_resource type="Script" uid="uid://dws0i2kltx6ca" path="res://world/huds/hud.gd" id="1_peuab"]
 
 [node name="PlayerHUD" type="Control" unique_id=1509901111]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_peuab")
 
 [node name="CrosshairContainer" type="CenterContainer" parent="." unique_id=1919539532]
 layout_mode = 1

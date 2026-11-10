@@ -19,3 +19,11 @@ enum Map {
 const Maps: Dictionary[UIDs.Map, String] = {
 	Map.GAME_LOBBY: "uid://dgjirdpi6fp3n",
 }
+
+enum HUD {
+	PLAYER,
+}
+
+const HUDs: Dictionary[UIDs.HUD, String] = {
+	HUD.PLAYER: "uid://bgftc5o2kqmr6",
+}

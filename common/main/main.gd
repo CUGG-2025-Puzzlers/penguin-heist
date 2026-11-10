@@ -22,6 +22,7 @@ func _ready() -> void:
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
 	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
+	GlobalEvents.show_hud_requested.connect(_on_show_hud_requested)
 	
 	# TODO: Load main menu when not debugging
 	_load_menu(UIDs.Menus[UIDs.Menu.CONNECTION])
@@ -49,6 +50,10 @@ func _on_menu_close_requested() -> void:
 func _on_player_spawn_requested(pos: Vector3) -> void:
 	print("Player spawn request accepted. Spawning player")
 	_spawn_player(pos)
+
+func _on_show_hud_requested(hud_uid: String) -> void:
+	print("Show HUD request accepted. Attempting to show HUD %s" % hud_uid)
+	_show_hud(hud_uid)
 
 #endregion
 
@@ -141,3 +146,21 @@ func _spawn_player(pos: Vector3) -> void:
 		return
 	
 	player.position = pos
+
+func _show_hud(hud_uid: String) -> void:
+	var hud_scene: PackedScene = ResourceLoader.load(hud_uid) as PackedScene
+	if hud_scene == null:
+		var error: String = "Could not load HUD %s as a packed scene" % hud_uid
+		push_error(error)
+		print(error)
+		return
+	
+	var hud_instance = hud_scene.instantiate() as HUD
+	if hud_instance == null:
+		var error: String =\
+			"Loaded menu %s does not extend HUD or does not exist" % hud_uid
+		push_error(error)
+		print(error)
+		return
+	
+	_hud_root.add_child(hud_instance)

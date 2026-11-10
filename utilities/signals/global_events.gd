@@ -55,3 +55,15 @@ signal player_spawn_requested(pos: Vector3)
 func request_player_spawn(pos: Vector3) -> void:
 	print("Requesting to spawn player")
 	player_spawn_requested.emit(pos)
+
+#endregion
+
+#region HUD Show/Hide
+
+signal show_hud_requested(hud_uid: String)
+
+func request_show_hud(hud_uid: String) -> void:
+	print("Requesting to show HUD %s" % hud_uid)
+	show_hud_requested.emit(hud_uid)
+
+#endregion

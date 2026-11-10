@@ -20,6 +20,9 @@ var slapping = false
 
 func _ready():
 	_item_use_timer.timeout.connect(_on_ItemUseTimer_timeout)
+	
+	if Fusion.is_connected_to_photon() and _replicator.has_authority():
+		GlobalEvents.request_show_hud(UIDs.HUDs[UIDs.HUD.PLAYER])
 
 func _physics_process(delta):
 	check_hover_collision()
