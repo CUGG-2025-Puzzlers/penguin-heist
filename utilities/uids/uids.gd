@@ -11,3 +11,11 @@ const Menus: Dictionary[UIDs.Menu, String] = {
 	Menu.ROOM_SELECT: "uid://dphcww3y0p1vw",
 	Menu.GAME_LOBBY:  "uid://b2wpsmtwpciir",
 }
+
+enum Map {
+	GAME_LOBBY,
+}
+
+const Maps: Dictionary[UIDs.Map, String] = {
+	Map.GAME_LOBBY: "uid://dgjirdpi6fp3n",
+}
