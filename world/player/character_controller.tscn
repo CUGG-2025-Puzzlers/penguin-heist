@@ -3,6 +3,15 @@
 [ext_resource type="Script" uid="uid://devttgmosotk1" path="res://world/player/character_controller.gd" id="1_7er00"]
 [ext_resource type="Script" uid="uid://cuonclmbct2f7" path="res://addons/proto_controller/proto_controller.gd" id="2_7er00"]
 
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_7er00"]
+property_count = 1
+properties/0/path = NodePath("ProtoController:position")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
 
@@ -21,6 +30,7 @@ script = ExtResource("1_7er00")
 
 [node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
 owner_mode = 1
+replication_config = SubResource("FusionReplicationConfig_7er00")
 process_priority = -2147483647
 process_physics_priority = -2147483647
 
