@@ -21,6 +21,7 @@ func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
+	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	
 	# TODO: Load main menu when not debugging
 	_load_menu(UIDs.Menus[UIDs.Menu.CONNECTION])
@@ -44,6 +45,10 @@ func _on_menu_open_requested(menu_uid: String) -> void:
 func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
+
+func _on_player_spawn_requested(pos: Vector3) -> void:
+	print("Player spawn request accepted. Spawning player")
+	_spawn_player(pos)
 
 #endregion
 
@@ -80,7 +85,6 @@ func _deferred_load_map(map_uid: String) -> void:
 	await get_tree().process_frame
 	
 	# TODO: Start map music
-	_current_map.spawn_players()
 	
 	GlobalEvents.complete_map_change()
 
@@ -128,3 +132,12 @@ func _close_menu() -> void:
 	# TODO: Resume or raise level music
 	
 	GlobalEvents.complete_menu_close()
+
+func _spawn_player(pos: Vector3) -> void:
+	var player = _player_spawner.spawn() as Node3D
+	
+	if player == null:
+		print("Error spawning player")
+		return
+	
+	player.position = pos

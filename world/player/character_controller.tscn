@@ -19,6 +19,11 @@ height = 1.8
 [node name="CharacterController" type="Node3D" unique_id=1436483759]
 script = ExtResource("1_7er00")
 
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
+owner_mode = 1
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
 [node name="ProtoController" type="CharacterBody3D" parent="." unique_id=1263997072]
 script = ExtResource("2_7er00")
 can_sprint = true

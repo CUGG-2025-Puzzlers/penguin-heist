@@ -47,3 +47,11 @@ func complete_menu_close() -> void:
 	menu_closed.emit()
 
 #endregion
+
+#region Player Events
+
+signal player_spawn_requested(pos: Vector3)
+
+func request_player_spawn(pos: Vector3) -> void:
+	print("Requesting to spawn player")
+	player_spawn_requested.emit(pos)
