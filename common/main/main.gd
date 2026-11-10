@@ -23,7 +23,7 @@ func _ready() -> void:
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
 	
 	# TODO: Load main menu when not debugging
-	_load_menu(UIDs.Menus[UIDs.Menu.Connection])
+	_load_menu(UIDs.Menus[UIDs.Menu.CONNECTION])
 
 #region Event Handlers
 

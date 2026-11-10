@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _on_connected_to_photon() -> void:
 	print("Successfully connected to Photon server as '%s'" % GameSettings.display_name)
-	_change_menu(UIDs.Menu.RoomSelect)
+	_change_menu(UIDs.Menu.ROOM_SELECT)
 
 func _on_connection_failed(error: String) -> void:
 	print("Failed to connect to Photon server: %s" % error)
@@ -41,12 +41,12 @@ func _on_connection_status_changed(status: int) -> void:
 func _on_room_joined() -> void:
 	print("Successfully joined room as '%s'" % GameSettings.display_name)
 	
-	_change_menu(UIDs.Menu.GameLobby)
+	_change_menu(UIDs.Menu.GAME_LOBBY)
 
 func _on_room_left() -> void:
 	print("Left room")
 	GlobalEvents.request_player_deletion()
-	_change_menu(UIDs.Menu.RoomSelect)
+	_change_menu(UIDs.Menu.ROOM_SELECT)
 
 #endregion
 

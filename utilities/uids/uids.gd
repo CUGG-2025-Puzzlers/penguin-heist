@@ -1,13 +1,13 @@
 class_name UIDs
 
 enum Menu {
-	Connection,
-	RoomSelect,
-	GameLobby,
+	CONNECTION,
+	ROOM_SELECT,
+	GAME_LOBBY,
 }
 
 const Menus: Dictionary[UIDs.Menu, String] = {
-	Menu.Connection: "uid://clxo8x302tukc",
-	Menu.RoomSelect: "uid://dphcww3y0p1vw",
-	Menu.GameLobby:  "uid://b2wpsmtwpciir",
+	Menu.CONNECTION:  "uid://clxo8x302tukc",
+	Menu.ROOM_SELECT: "uid://dphcww3y0p1vw",
+	Menu.GAME_LOBBY:  "uid://b2wpsmtwpciir",
 }
