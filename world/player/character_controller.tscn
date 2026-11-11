@@ -1,16 +1,21 @@
 [gd_scene format=3 uid="uid://c6mor2d4870ba"]
 
 [ext_resource type="Script" uid="uid://devttgmosotk1" path="res://world/player/character_controller.gd" id="1_7er00"]
-[ext_resource type="Script" uid="uid://cuonclmbct2f7" path="res://addons/proto_controller/proto_controller.gd" id="2_7er00"]
 
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_7er00"]
-property_count = 1
-properties/0/path = NodePath("ProtoController:position")
+property_count = 2
+properties/0/path = NodePath(":position")
 properties/0/max_array_capacity = 0
 properties/0/interface_tag = ""
 properties/0/interpolate = 0
 properties/0/element_type = 0
 properties/0/element_class_name = ""
+properties/1/path = NodePath(":rotation")
+properties/1/max_array_capacity = 0
+properties/1/interface_tag = ""
+properties/1/interpolate = 0
+properties/1/element_type = 0
+properties/1/element_class_name = ""
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -23,47 +28,45 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[node name="CharacterController" type="Node3D" unique_id=1436483759]
+[node name="CharacterController" type="CharacterBody3D" unique_id=1749621568]
 script = ExtResource("1_7er00")
 
-[node name="PlayerReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
+[node name="CharacterReplicator" type="FusionSharedReplicator" parent="." unique_id=550040161]
 owner_mode = 1
 replication_config = SubResource("FusionReplicationConfig_7er00")
 unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
 
-[node name="ProtoController" type="CharacterBody3D" parent="." unique_id=1263997072]
-script = ExtResource("2_7er00")
-can_sprint = true
-
-[node name="Mesh" type="MeshInstance3D" parent="ProtoController" unique_id=400821634]
+[node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=400821634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 material_override = SubResource("StandardMaterial3D_iof21")
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ucva2")
 
-[node name="Collider" type="CollisionShape3D" parent="ProtoController" unique_id=932706275]
+[node name="CharacterCollider" type="CollisionShape3D" parent="." unique_id=932706275]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_iof21")
 
-[node name="Head" type="Node3D" parent="ProtoController" unique_id=1791332881]
+[node name="CharacterHead" type="Node3D" parent="." unique_id=1791332881]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="PlayerCamera" type="Camera3D" parent="ProtoController/Head" unique_id=1087492476]
+[node name="PlayerCamera" type="Camera3D" parent="CharacterHead" unique_id=1087492476]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29999995, 0)
+current = true
 
-[node name="InteractRay" type="RayCast3D" parent="ProtoController/Head/PlayerCamera" unique_id=1185292218]
+[node name="InteractRay" type="RayCast3D" parent="CharacterHead/PlayerCamera" unique_id=1185292218]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collide_with_areas = true
 
-[node name="SnowballPos" type="Marker3D" parent="ProtoController/Head" unique_id=1043207918]
+[node name="SnowballPos" type="Marker3D" parent="CharacterHead" unique_id=1043207918]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 
-[node name="ItemUseTimer" type="Timer" parent="ProtoController" unique_id=423784113]
+[node name="ItemUseTimer" type="Timer" parent="." unique_id=423784113]
 unique_name_in_owner = true
 wait_time = 2.0
