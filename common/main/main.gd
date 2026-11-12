@@ -23,7 +23,7 @@ func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
-	GlobalEvents.show_hud_requested.connect(_on_show_hud_requested)
+	GlobalEvents.add_hud_requested.connect(_on_add_hud_requested)
 	
 	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
@@ -53,7 +53,7 @@ func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
 
-func _on_show_hud_requested(hud_id: HUD.ID) -> void:
+func _on_add_hud_requested(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
 	print("Show HUD request accepted. Attempting to show HUD `%s`" % hud_name)
 	_show_hud(hud_id)
