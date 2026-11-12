@@ -46,8 +46,10 @@ func _on_room_joined() -> void:
 
 func _on_room_left() -> void:
 	print("Left room")
-	GlobalEvents.request_player_deletion()
 	_change_menu(UIDs.Menu.ROOM_SELECT)
+	# TODO:
+	# Remove all HUD
+	# Remove map
 
 #endregion
 
