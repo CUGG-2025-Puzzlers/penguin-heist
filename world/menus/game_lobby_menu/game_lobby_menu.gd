@@ -29,6 +29,7 @@ func _on_start_game_pressed() -> void:
 	pass
 
 func _on_leave_game_pressed() -> void:
+	_disconnect_start_button()
 	Fusion.leave_room()
 
 #endregion
@@ -36,6 +37,10 @@ func _on_leave_game_pressed() -> void:
 func _enable_start_button() -> void:
 	_start_game_button.visible = true
 	_start_game_button.pressed.connect(_on_start_game_pressed)
+
+func _disconnect_start_button() -> void:
+	if _start_game_button.pressed.is_connected(_on_start_game_pressed):
+		_start_game_button.pressed.disconnect(_on_start_game_pressed)
 
 func _spawn_local_player_label() -> void:
 	var display_name_label: Label = _display_name_label_spawner.spawn() as Label
