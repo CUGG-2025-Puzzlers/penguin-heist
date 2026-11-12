@@ -276,8 +276,6 @@ func _use_held_item() -> void:
 		
 		GlobalEvents.request_snowball_throw(_snowball_pos)
 
-#endregion
-
 func _on_item_use_timer_timeout() -> void:
 	can_throw = true
 
@@ -317,3 +315,5 @@ func slap() -> void:
 
 	await swing.finished
 	slapping = false
+
+#endregion
