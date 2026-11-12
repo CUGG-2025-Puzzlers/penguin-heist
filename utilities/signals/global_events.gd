@@ -69,10 +69,21 @@ func request_snowball_throw(spawn_marker: Marker3D) -> void:
 #region HUD Show/Hide
 
 signal add_hud_requested(hud_id: HUD.ID)
+signal remove_hud_requested(hud_id: HUD.ID)
+signal remove_all_hud_requested()
 
 func request_add_hud(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
 	print("Requesting to add HUD `%s`" % hud_name)
 	add_hud_requested.emit(hud_id)
+
+func request_remove_hud(hud_id: HUD.ID) -> void:
+	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
+	print("Requesting to remove HUD `%s`" % hud_name)
+	remove_hud_requested.emit(hud_id)
+
+func request_remove_all_hud() -> void:
+	print("Requesting to remove all HUD")
+	remove_all_hud_requested.emit()
 
 #endregion
