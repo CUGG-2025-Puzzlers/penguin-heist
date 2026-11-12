@@ -70,7 +70,7 @@ func request_snowball_throw(spawn_marker: Marker3D) -> void:
 
 signal show_hud_requested(hud_id: HUD.ID)
 
-func request_show_hud(hud_id: String) -> void:
+func request_show_hud(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
 	print("Requesting to show HUD `%s`" % hud_name)
 	show_hud_requested.emit(hud_id)

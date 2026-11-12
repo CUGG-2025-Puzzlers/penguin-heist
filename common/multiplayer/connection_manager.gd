@@ -41,7 +41,7 @@ func _on_connection_status_changed(status: int) -> void:
 func _on_room_joined() -> void:
 	print("Successfully joined room as '%s'" % GameSettings.display_name)
 	
-	GlobalEvents.request_map_change(UIDs.Maps[Map.ID.GAME_LOBBY])
+	GlobalEvents.request_map_change(Map.ID.GAME_LOBBY)
 	_change_menu(Menu.ID.GAME_LOBBY)
 
 func _on_room_left() -> void:
@@ -85,4 +85,4 @@ func _change_menu(menu: Menu.ID) -> void:
 	GlobalEvents.request_menu_close()
 	await GlobalEvents.menu_closed
 	
-	GlobalEvents.request_menu_open(UIDs.Menus[menu])
+	GlobalEvents.request_menu_open(menu)

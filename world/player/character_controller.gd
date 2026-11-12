@@ -54,7 +54,7 @@ func _ready() -> void:
 	look_rotation.y = rotation.y
 	look_rotation.x = _head.rotation.x
 	
-	GlobalEvents.request_show_hud(UIDs.HUDs[HUD.ID.PLAYER])
+	GlobalEvents.request_show_hud(HUD.ID.PLAYER)
 
 func _physics_process(delta: float) -> void:
 	# Prevent other players from controlling this character
