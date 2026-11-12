@@ -11,7 +11,9 @@ extends Node
 @onready var _menu_root      : Control = %MenuRoot
 @onready var _debug_root     : Control = %DebugRoot
 
-@onready var _player_spawner: FusionSpawner = %PlayerSpawner
+# Network Spawners
+@onready var _player_spawner  : FusionSpawner = %PlayerSpawner
+@onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
 
 var _current_map : Map
 var _current_menu: Menu
@@ -21,8 +23,10 @@ func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
-	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	GlobalEvents.show_hud_requested.connect(_on_show_hud_requested)
+	
+	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
+	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
 	# TODO: Load main menu when not debugging
 	_load_menu(UIDs.Menus[UIDs.Menu.CONNECTION])
@@ -47,13 +51,17 @@ func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
 
+func _on_show_hud_requested(hud_uid: String) -> void:
+	print("Show HUD request accepted. Attempting to show HUD %s" % hud_uid)
+	_show_hud(hud_uid)
+
 func _on_player_spawn_requested(pos: Vector3) -> void:
 	print("Player spawn request accepted. Spawning player")
 	_spawn_player(pos)
 
-func _on_show_hud_requested(hud_uid: String) -> void:
-	print("Show HUD request accepted. Attempting to show HUD %s" % hud_uid)
-	_show_hud(hud_uid)
+func _on_snowball_throw_requested(spawn_marker: Marker3D) -> void:
+	print("Snowball throw request accepted. Throwing snowball, watch out!")
+	_throw_snowball(spawn_marker)
 
 #endregion
 
@@ -138,15 +146,6 @@ func _close_menu() -> void:
 	
 	GlobalEvents.complete_menu_close()
 
-func _spawn_player(pos: Vector3) -> void:
-	var player = _player_spawner.spawn() as Node3D
-	
-	if player == null:
-		print("Error spawning player")
-		return
-	
-	player.position = pos
-
 func _show_hud(hud_uid: String) -> void:
 	var hud_scene: PackedScene = ResourceLoader.load(hud_uid) as PackedScene
 	if hud_scene == null:
@@ -164,3 +163,24 @@ func _show_hud(hud_uid: String) -> void:
 		return
 	
 	_hud_root.add_child(hud_instance)
+
+func _spawn_player(pos: Vector3) -> void:
+	var player = _player_spawner.spawn() as Node3D
+	
+	if player == null:
+		print("Error spawning player")
+		return
+	
+	player.position = pos
+
+func _throw_snowball(spawn_marker: Marker3D) -> void:
+	var snowball: Snowball = _snowball_spawner.spawn() as Snowball
+		
+	# TODO: Print some error if spawner did not spawn a snowball scene
+	if not snowball:
+		return
+	
+	snowball.set_spawner(_snowball_spawner)
+	snowball.global_position = spawn_marker.global_position
+	var launch_direction: Vector3 = -spawn_marker.global_basis.z
+	snowball.launch(launch_direction)

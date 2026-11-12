@@ -41,8 +41,6 @@ var held_fish = null
 var can_throw : bool = true
 var slapping  : bool = false
 
-var snowball = preload("res://world/items/snowball/snowball.tscn")
-
 #region Node Overrides
 
 func _ready() -> void:
@@ -85,9 +83,10 @@ func _physics_process(delta: float) -> void:
 	# Use velocity to actually move
 	move_and_slide()
 	
-	check_hover_collision()
+	_check_hover_collision()
 	
-	snowball_throw()
+	if Input.is_action_just_pressed("input_throw"):
+		_use_held_item()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Prevent other players from controlling this character
@@ -107,9 +106,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Toggle freefly mode
 	if can_freefly and Input.is_action_just_pressed(input_freefly):
 		if not freeflying:
-			enable_freefly()
+			_enable_freefly()
 		else:
-			disable_freefly()
+			_disable_freefly()
 	
 	# Interact
 	if event.is_action_pressed("interact"):
@@ -179,14 +178,14 @@ func _rotate_look(rot_input: Vector2) -> void:
 
 ## Enables the ability to fly around freely
 ## No gravity or collisions
-func enable_freefly() -> void:
+func _enable_freefly() -> void:
 	_collider.disabled = true
 	freeflying = true
 	velocity = Vector3.ZERO
 
 ## Disables the ability to fly around freely
 ## Re-enables collisions and possible gravity
-func disable_freefly() -> void:
+func _disable_freefly() -> void:
 	_collider.disabled = false
 	freeflying = false
 
@@ -231,50 +230,53 @@ func _check_input_mappings() -> void:
 
 #endregion
 
-func check_hover_collision() -> void:
-	var item = null
+#region Items / Interactions
 
-	if _raycast.is_colliding():
-		var collider = _raycast.get_collider()
+func _check_hover_collision() -> void:
+	if not _raycast.is_colliding():
+		return
+	
+	var collider: Object = _raycast.get_collider()
+	if not collider:
+		return
+	
+	# TODO: Check if collider parent is an Interactable instead of checking if
+	# 		it has an "interact" method 
+	var item = collider.get_parent()
+	if not item.has_method("interact"):
+		item = null
 
-		if collider:
-			item = collider.get_parent()
+	if item == current_interactable:
+		return
+	
+	# TODO: Move prompt to player HUD
+	_hide_current_prompt()
 
-			if not item.has_method("interact"):
-				item = null
+	if item:
+		current_interactable = item
+		current_interactable.show_prompt()
 
-	if item != current_interactable:
-		hide_current_prompt()
+func _hide_current_prompt() -> void:
+	if not current_interactable:
+		return
+		
+	current_interactable.hide_prompt()
+	current_interactable = null
 
-		if item:
-			current_interactable = item
-			current_interactable.show_prompt()
-
-func hide_current_prompt() -> void:
-	if current_interactable:
-		current_interactable.hide_prompt()
-		current_interactable = null
-
-func snowball_throw() -> void:
+func _use_held_item() -> void:
+	# TODO: Refactor item use logic to individual item scripts and just call
+	# held_item.use() or equivalent
 	if held_fish:
-		if Input.is_action_just_pressed("input_throw"):
-			slap()
+		slap()
 		return
 
-	if Input.is_action_just_pressed("input_throw") && can_throw:
-		var snowball_ins = snowball.instantiate()
-		snowball_ins.position = _snowball_pos.global_position
-		get_tree().current_scene.add_child(snowball_ins)
-		
+	if can_throw:
 		can_throw = false
 		_item_use_timer.start()
 		
-		var force = -0.5
-		var upDirection = 0.05
-		
-		var playerRotation = _head.global_transform.basis.z.normalized()
-		
-		snowball_ins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
+		GlobalEvents.request_snowball_throw(_snowball_pos)
+
+#endregion
 
 func _on_item_use_timer_timeout() -> void:
 	can_throw = true
@@ -294,7 +296,7 @@ func activate() -> void:
 
 	var item = hit.get_parent()
 	if item and item.has_method("pick_up"):
-		hide_current_prompt()
+		_hide_current_prompt()
 		held_fish = item
 		item.pick_up(_player_camera)
 
