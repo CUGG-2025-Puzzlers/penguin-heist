@@ -29,21 +29,23 @@ func _ready() -> void:
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
 	# TODO: Load main menu when not debugging
-	_load_menu(UIDs.Menus[Menu.ID.CONNECTION])
+	_load_menu(Menu.ID.CONNECTION)
 
 #region Event Handlers
 
 ## Event Handler for when a map change is requested.[br]
-## Attempts to load the map given by [param map_uid]
-func _on_map_change_requested(map_uid: String) -> void:
-	print("Map change request accepted. Attempting to load map %s" % map_uid)
-	_load_map(map_uid)
+## Attempts to load the map given by [param map_id]
+func _on_map_change_requested(map_id: Map.ID) -> void:
+	var map_name: String = Map.ID.find_key(map_id).capitalize()
+	print("Map change request accepted. Attempting to load map `%s`" % map_name)
+	_load_map(map_id)
 
 ## Event Handler for when a menu is requested to be opened.[br]
-## Attempts to open the menu given by [param menu_uid]
-func _on_menu_open_requested(menu_uid: String) -> void:
-	print("Menu open request accepted. Attempting to open menu %s" % menu_uid)
-	_load_menu(menu_uid)
+## Attempts to open the menu given by [param menu_id]
+func _on_menu_open_requested(menu_id: Menu.ID) -> void:
+	var menu_name: String = Menu.ID.find_key(menu_id).capitalize()
+	print("Menu open request accepted. Attempting to open menu `%s`" % menu_name)
+	_load_menu(menu_id)
 
 ## Event Handler for when a menu is requested to be closed.[br]
 ## Attempts to close the current menu
@@ -51,9 +53,10 @@ func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
 
-func _on_show_hud_requested(hud_uid: String) -> void:
-	print("Show HUD request accepted. Attempting to show HUD %s" % hud_uid)
-	_show_hud(hud_uid)
+func _on_show_hud_requested(hud_id: HUD.ID) -> void:
+	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
+	print("Show HUD request accepted. Attempting to show HUD `%s`" % hud_name)
+	_show_hud(hud_id)
 
 func _on_player_spawn_requested(pos: Vector3) -> void:
 	print("Player spawn request accepted. Spawning player")
@@ -66,11 +69,11 @@ func _on_snowball_throw_requested(spawn_marker: Marker3D) -> void:
 #endregion
 
 ## Loads a new map in the world
-func _load_map(map_uid: String) -> void:
-	_deferred_load_map.call_deferred(map_uid)
+func _load_map(map_id: Map.ID) -> void:
+	_deferred_load_map.call_deferred(map_id)
 
 ## Does the actual map loading during idle time
-func _deferred_load_map(map_uid: String) -> void:
+func _deferred_load_map(map_id: Map.ID) -> void:
 	# Remove the current map
 	if _current_map != null:
 		_current_map.queue_free()
@@ -78,9 +81,11 @@ func _deferred_load_map(map_uid: String) -> void:
 		await get_tree().process_frame
 	
 	# Load the next map
+	var map_name: String = Map.ID.find_key(map_id).capitalize()
+	var map_uid: String = UIDs.Maps[map_id]
 	var new_map: PackedScene = ResourceLoader.load(map_uid) as PackedScene
 	if new_map == null:
-		var error: String = "Could not load map %s as PackedScene" % map_uid
+		var error: String = "Could not load map `%s` as PackedScene" % map_name
 		push_error(error)
 		print(error)
 		return
@@ -89,7 +94,7 @@ func _deferred_load_map(map_uid: String) -> void:
 	_current_map = new_map.instantiate() as Map
 	if _current_map == null:
 		var error: String =\
-			"Loaded map %s is not of type Map or does not exist" % map_uid
+			"Loaded map `%s` is not of type Map or does not exist" % map_name
 		push_error(error)
 		print(error)
 		return
@@ -103,17 +108,20 @@ func _deferred_load_map(map_uid: String) -> void:
 
 ## Loads a menu on top of the current scene (if there is one).[br]
 ## Restricted to only one menu loaded at any one time (i.e. no stacked menus)
-func _load_menu(menu_uid: String) -> void:
+func _load_menu(menu_id: Menu.ID) -> void:
+	var menu_name = Menu.ID.find_key(menu_id).capitalize()
+	
 	if _current_menu != null:
 		var error: String =\
-			"Could not load menu %s: Another menu is already open" % menu_uid
+			"Could not load menu `%s`: Another menu is already open" % menu_name
 		push_error(error)
 		print(error)
 		return
 	
+	var menu_uid: String = UIDs.Menus[menu_id]
 	var menu_scene: PackedScene = ResourceLoader.load(menu_uid) as PackedScene
 	if menu_scene == null:
-		var error: String = "Could not load menu %s as a packed scene" % menu_uid
+		var error: String = "Could not load menu `%s` as a packed scene" % menu_name
 		push_error(error)
 		print(error)
 		return
@@ -121,7 +129,7 @@ func _load_menu(menu_uid: String) -> void:
 	_current_menu = menu_scene.instantiate() as Menu
 	if _current_menu == null:
 		var error: String =\
-			"Loaded menu %s does not extend Menu or does not exist" % menu_uid
+			"Loaded menu `%s` does not extend Menu or does not exist" % menu_name
 		push_error(error)
 		print(error)
 		return
@@ -146,10 +154,12 @@ func _close_menu() -> void:
 	
 	GlobalEvents.complete_menu_close()
 
-func _show_hud(hud_uid: String) -> void:
+func _show_hud(hud_id: HUD.ID) -> void:
+	var hud_name: String = Menu.ID.find_key(hud_id).capitalize()
+	var hud_uid: String = UIDs.HUDs[hud_id]
 	var hud_scene: PackedScene = ResourceLoader.load(hud_uid) as PackedScene
 	if hud_scene == null:
-		var error: String = "Could not load HUD %s as a packed scene" % hud_uid
+		var error: String = "Could not load HUD `%s` as a packed scene" % hud_name
 		push_error(error)
 		print(error)
 		return
@@ -157,7 +167,7 @@ func _show_hud(hud_uid: String) -> void:
 	var hud_instance = hud_scene.instantiate() as HUD
 	if hud_instance == null:
 		var error: String =\
-			"Loaded menu %s does not extend HUD or does not exist" % hud_uid
+			"Loaded menu `%s` does not extend HUD or does not exist" % hud_name
 		push_error(error)
 		print(error)
 		return

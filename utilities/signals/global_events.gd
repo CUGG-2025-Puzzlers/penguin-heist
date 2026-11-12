@@ -3,13 +3,14 @@ extends Node
 
 #region Map Change
 
-signal map_change_requested(map_uid: String)
+signal map_change_requested(map_id: Map.ID)
 signal map_changed()
 
 ## Emits a signal that a map change was requested.
-func request_map_change(map_uid: String) -> void:
-	print("Requesting map change to %s" % map_uid)
-	map_change_requested.emit(map_uid)
+func request_map_change(map_id: Map.ID) -> void:
+	var map_name: String = Map.ID.find_key(map_id).capitalize()
+	print("Requesting map change to `%s`" % map_name)
+	map_change_requested.emit(map_id)
 
 ## Emits a signal that a map change request was completed.
 func complete_map_change() -> void:
@@ -20,13 +21,14 @@ func complete_map_change() -> void:
 
 #region Menu Open/Close
 
-signal menu_open_requested(menu_uid: String)
+signal menu_open_requested(menu_id: Menu.ID)
 signal menu_opened()
 
 ## Emits a signal that a menu was requested to be opened.
-func request_menu_open(menu_uid: String) -> void:
-	print("Requesting to open menu %s" % menu_uid)
-	menu_open_requested.emit(menu_uid)
+func request_menu_open(menu_id: Menu.ID) -> void:
+	var menu_name: String = Menu.ID.find_key(menu_id).capitalize()
+	print("Requesting to open menu `%s`" % menu_name)
+	menu_open_requested.emit(menu_id)
 
 ## Emits a signal that a menu open request was completed.
 func complete_menu_open() -> void:
@@ -66,10 +68,11 @@ func request_snowball_throw(spawn_marker: Marker3D) -> void:
 
 #region HUD Show/Hide
 
-signal show_hud_requested(hud_uid: String)
+signal show_hud_requested(hud_id: HUD.ID)
 
-func request_show_hud(hud_uid: String) -> void:
-	print("Requesting to show HUD %s" % hud_uid)
-	show_hud_requested.emit(hud_uid)
+func request_show_hud(hud_id: String) -> void:
+	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
+	print("Requesting to show HUD `%s`" % hud_name)
+	show_hud_requested.emit(hud_id)
 
 #endregion
