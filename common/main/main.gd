@@ -19,7 +19,8 @@ var _current_map : Map
 var _current_menu: Menu
 var _active_huds : Dictionary[HUD.ID, HUD]
 
-# Called when the node enters the scene tree for the first time.
+#region Node Overrides
+
 func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
 	
@@ -35,6 +36,8 @@ func _ready() -> void:
 	
 	# TODO: Load main menu when not debugging
 	_load_menu(Menu.ID.CONNECTION)
+
+#endregion
 
 #region Event Handlers
 
@@ -58,24 +61,35 @@ func _on_menu_close_requested() -> void:
 	print("Menu close request accepted. Attempting to close current menu")
 	_close_menu()
 
+## Event Handler for when a HUD is requested to be added.[br]
+## Attempts to add the HUD given by [param hud_id]
 func _on_add_hud_requested(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
 	print("Add HUD request accepted. Attempting to add HUD `%s`" % hud_name)
 	_add_hud(hud_id)
 
+## Event Handler for when a HUD is requested to be removed.[br]
+## Attempts to remove the HUD given by [param hud_id]
 func _on_remove_hud_requested(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
 	print("Remove HUD request accepted. Attempting to remove HUD `%s`" % hud_name)
 	_remove_hud(hud_id)
 
+## Event Handler for when all HUDs are requested to be removed.[br]
+## Attempts to remove all HUDs
 func _on_remove_all_hud_requested() -> void:
 	print("Remove all HUD request accepted. Attempting to remove all HUDs")
 	_remove_all_hud()
 
+## Event Handler for when the local player is requested to be spawned.[br]
+## Attempts to spawn the player at the position given [param pos]
 func _on_player_spawn_requested(pos: Vector3) -> void:
 	print("Player spawn request accepted. Spawning player")
 	_spawn_player(pos)
 
+## Event Handler for when a snowball is requested to be thrown.[br]
+## Attempts to spawn and throw the snowball from the marker given by 
+## [param spawn_marker]
 func _on_snowball_throw_requested(spawn_marker: Marker3D) -> void:
 	print("Snowball throw request accepted. Throwing snowball, watch out!")
 	_throw_snowball(spawn_marker)
@@ -181,6 +195,8 @@ func _close_menu() -> void:
 
 #region HUD Functions
 
+## Loads the HUD given by [param hud_id] on top of the current scene.[br]
+## Internally keeps track of open HUDs so that they can be closed later
 func _add_hud(hud_id: HUD.ID) -> void:
 	var hud_name: String = Menu.ID.find_key(hud_id).capitalize()
 	var hud_uid: String = UIDs.HUDs[hud_id]
@@ -202,6 +218,7 @@ func _add_hud(hud_id: HUD.ID) -> void:
 	_active_huds[hud_id] = hud_instance
 	_hud_root.add_child(hud_instance)
 
+## Removes the HUD given by [param hud_id] from the scene
 func _remove_hud(hud_id: HUD.ID) -> void:
 	if not _active_huds.has(hud_id):
 		return
@@ -210,6 +227,7 @@ func _remove_hud(hud_id: HUD.ID) -> void:
 	hud_instance.queue_free()
 	_active_huds.erase(hud_id)
 
+## Removes all HUDs from the scene
 func _remove_all_hud() -> void:
 	for id: HUD.ID in _active_huds.keys():
 		_remove_hud(id)
@@ -218,6 +236,8 @@ func _remove_all_hud() -> void:
 
 #region Player Functions
 
+## Spawns the player using the FusionSpawner to allow for networking
+## Sets the player's position to the position given by [param pos]
 func _spawn_player(pos: Vector3) -> void:
 	var player = _player_spawner.spawn() as Node3D
 	
@@ -227,6 +247,9 @@ func _spawn_player(pos: Vector3) -> void:
 	
 	player.position = pos
 
+## Spawns a snowball using the FusionSpawner to allow for networking
+## Sets the position to the [param spawn_marker]'s position and launches
+## it in the forward direction of the marker
 func _throw_snowball(spawn_marker: Marker3D) -> void:
 	var snowball: Snowball = _snowball_spawner.spawn() as Snowball
 		
