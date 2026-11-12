@@ -29,7 +29,7 @@ func _ready() -> void:
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
 	# TODO: Load main menu when not debugging
-	_load_menu(UIDs.Menus[UIDs.Menu.CONNECTION])
+	_load_menu(UIDs.Menus[Menu.ID.CONNECTION])
 
 #region Event Handlers
 
