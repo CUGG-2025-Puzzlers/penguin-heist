@@ -17,13 +17,18 @@ extends Node
 
 var _current_map : Map
 var _current_menu: Menu
+var _active_huds : Dictionary[HUD.ID, HUD]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalEvents.map_change_requested.connect(_on_map_change_requested)
+	
 	GlobalEvents.menu_open_requested.connect(_on_menu_open_requested)
 	GlobalEvents.menu_close_requested.connect(_on_menu_close_requested)
+	
 	GlobalEvents.add_hud_requested.connect(_on_add_hud_requested)
+	GlobalEvents.remove_hud_requested.connect(_on_remove_hud_requested)
+	GlobalEvents.remove_all_hud_requested.connect(_on_remove_all_hud_requested)
 	
 	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
@@ -55,8 +60,17 @@ func _on_menu_close_requested() -> void:
 
 func _on_add_hud_requested(hud_id: HUD.ID) -> void:
 	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
-	print("Show HUD request accepted. Attempting to show HUD `%s`" % hud_name)
-	_show_hud(hud_id)
+	print("Add HUD request accepted. Attempting to add HUD `%s`" % hud_name)
+	_add_hud(hud_id)
+
+func _on_remove_hud_requested(hud_id: HUD.ID) -> void:
+	var hud_name: String = HUD.ID.find_key(hud_id).capitalize()
+	print("Remove HUD request accepted. Attempting to remove HUD `%s`" % hud_name)
+	_remove_hud(hud_id)
+
+func _on_remove_all_hud_requested() -> void:
+	print("Remove all HUD request accepted. Attempting to remove all HUDs")
+	_remove_all_hud()
 
 func _on_player_spawn_requested(pos: Vector3) -> void:
 	print("Player spawn request accepted. Spawning player")
@@ -67,6 +81,8 @@ func _on_snowball_throw_requested(spawn_marker: Marker3D) -> void:
 	_throw_snowball(spawn_marker)
 
 #endregion
+
+#region Map Functions
 
 ## Loads a new map in the world
 func _load_map(map_id: Map.ID) -> void:
@@ -79,6 +95,9 @@ func _deferred_load_map(map_id: Map.ID) -> void:
 		_current_map.queue_free()
 		_current_map = null
 		await get_tree().process_frame
+	
+	if map_id == Map.ID.NONE:
+		return
 	
 	# Load the next map
 	var map_name: String = Map.ID.find_key(map_id).capitalize()
@@ -105,6 +124,10 @@ func _deferred_load_map(map_id: Map.ID) -> void:
 	# TODO: Start map music
 	
 	GlobalEvents.complete_map_change()
+
+#endregion
+
+#region Menu Functions
 
 ## Loads a menu on top of the current scene (if there is one).[br]
 ## Restricted to only one menu loaded at any one time (i.e. no stacked menus)
@@ -154,7 +177,11 @@ func _close_menu() -> void:
 	
 	GlobalEvents.complete_menu_close()
 
-func _show_hud(hud_id: HUD.ID) -> void:
+#endregion
+
+#region HUD Functions
+
+func _add_hud(hud_id: HUD.ID) -> void:
 	var hud_name: String = Menu.ID.find_key(hud_id).capitalize()
 	var hud_uid: String = UIDs.HUDs[hud_id]
 	var hud_scene: PackedScene = ResourceLoader.load(hud_uid) as PackedScene
@@ -167,12 +194,29 @@ func _show_hud(hud_id: HUD.ID) -> void:
 	var hud_instance = hud_scene.instantiate() as HUD
 	if hud_instance == null:
 		var error: String =\
-			"Loaded menu `%s` does not extend HUD or does not exist" % hud_name
+			"Loaded HUD `%s` does not extend HUD or does not exist" % hud_name
 		push_error(error)
 		print(error)
 		return
 	
+	_active_huds[hud_id] = hud_instance
 	_hud_root.add_child(hud_instance)
+
+func _remove_hud(hud_id: HUD.ID) -> void:
+	if not _active_huds.has(hud_id):
+		return
+	
+	var hud_instance = _active_huds[hud_id]
+	hud_instance.queue_free()
+	_active_huds.erase(hud_id)
+
+func _remove_all_hud() -> void:
+	for id: HUD.ID in _active_huds.keys():
+		_remove_hud(id)
+
+#endregion
+
+#region Player Functions
 
 func _spawn_player(pos: Vector3) -> void:
 	var player = _player_spawner.spawn() as Node3D
@@ -194,3 +238,5 @@ func _throw_snowball(spawn_marker: Marker3D) -> void:
 	snowball.global_position = spawn_marker.global_position
 	var launch_direction: Vector3 = -spawn_marker.global_basis.z
 	snowball.launch(launch_direction)
+
+#endregion

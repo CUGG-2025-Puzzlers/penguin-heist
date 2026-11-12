@@ -47,10 +47,8 @@ func _on_room_joined() -> void:
 func _on_room_left() -> void:
 	print("Left room")
 	_change_menu(Menu.ID.ROOM_SELECT)
-	
-	# TODO:
-	# Remove all HUD
-	# Remove map
+	GlobalEvents.request_remove_all_hud()
+	GlobalEvents.request_map_change(Map.ID.NONE)
 
 #endregion
 
