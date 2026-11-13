@@ -21,7 +21,8 @@ func _ready() -> void:
 #region Event Handlers
 
 func _on_player_left(_player_id: int, _is_inactive: bool) -> void:
-	if Fusion.is_master_client():
+	# Only enable start button when becoming master client
+	if Fusion.is_master_client() and _start_game_button.disabled:
 		print("[%s] I am the Master Client now!" % GameSettings.display_name)
 		_enable_start_button()
 
