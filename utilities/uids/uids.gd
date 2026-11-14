@@ -1,13 +1,15 @@
 class_name UIDs
 
-enum Menu {
-	Connection,
-	RoomSelect,
-	GameLobby,
+const Menus: Dictionary[Menu.ID, String] = {
+	Menu.ID.CONNECTION:  "uid://clxo8x302tukc",
+	Menu.ID.ROOM_SELECT: "uid://dphcww3y0p1vw",
+	Menu.ID.GAME_LOBBY:  "uid://b2wpsmtwpciir",
 }
 
-const Menus: Dictionary[UIDs.Menu, String] = {
-	Menu.Connection: "uid://clxo8x302tukc",
-	Menu.RoomSelect: "uid://dphcww3y0p1vw",
-	Menu.GameLobby:  "uid://b2wpsmtwpciir",
+const Maps: Dictionary[Map.ID, String] = {
+	Map.ID.GAME_LOBBY: "uid://dgjirdpi6fp3n",
+}
+
+const HUDs: Dictionary[HUD.ID, String] = {
+	HUD.ID.PLAYER: "uid://bgftc5o2kqmr6",
 }

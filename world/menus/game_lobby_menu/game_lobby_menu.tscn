@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_pvv55")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1502733558]
@@ -54,3 +55,44 @@ size_flags_vertical = 1
 text = "Not In Room..."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1629868295]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -139.0
+offset_bottom = 51.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LeaveGameButton" type="Button" parent="MarginContainer3" unique_id=1743324444]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Leave Game"
+
+[node name="MarginContainer4" type="MarginContainer" parent="." unique_id=719347670]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -69.5
+offset_top = -51.0
+offset_right = 69.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="StartGameButton" type="Button" parent="MarginContainer4" unique_id=449637651]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Start Game"
