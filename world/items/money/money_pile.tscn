@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c2vrskj1bu6t7"]
+
+[ext_resource type="Script" uid="uid://ctly4x6dv3j12" path="res://world/items/money/pile.gd" id="1_5gfrf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6v6b"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="MoneyPile" type="Node3D" unique_id=1810272163]
+script = ExtResource("1_5gfrf")
+count = null
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=916274982]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1565285621]
+material = SubResource("StandardMaterial3D_l6v6b")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=2047280137]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+visible = false
+billboard = 1
+text = "E to pick up"
