@@ -49,6 +49,7 @@ gizmo_extents = 0.86
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=819369266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=384803664]
@@ -59,10 +60,6 @@ material = SubResource("StandardMaterial3D_sontw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, 0)
 size = Vector3(4, 4, 1)
 material = SubResource("StandardMaterial3D_pq8a6")
-
-[node name="Money" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1436597736]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.8)
-material = SubResource("StandardMaterial3D_hj6nr")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1905798025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5000001, 3.85, -6.2000003)
@@ -84,3 +81,7 @@ transform = Transform3D(0.33309853, 0.32072234, 0.88666934, 0, -0.9403721, 0.340
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=797596962]
 transform = Transform3D(-0.22075135, -0.33175611, -0.9171732, 0, -0.9403721, 0.34014747, -0.9753301, 0.075088024, 0.20758843, 0, 0, 0)
+
+[node name="SpawnMoneyPile" type="Marker3D" parent="." unique_id=509094977]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.211, 1, -5.022)
