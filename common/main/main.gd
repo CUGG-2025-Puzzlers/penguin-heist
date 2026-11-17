@@ -15,6 +15,7 @@ extends Node
 @onready var _player_spawner  : FusionSpawner = %PlayerSpawner
 @onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
+@onready var _money_spawner   : FusionSpawner = %MoneyPileSpawner
 
 var _player      : PlayerController
 var _current_map : Map
@@ -36,6 +37,8 @@ func _ready() -> void:
 	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
+	GlobalEvents.money_spawn_requested.connect(_on_money_spawn_requested)
+
 	# TODO: Load main menu when not debugging
 	_load_menu(Menu.ID.CONNECTION)
 
@@ -268,5 +271,18 @@ func _throw_snowball(spawn_marker: Marker3D) -> void:
 	snowball.global_position = spawn_marker.global_position
 	var launch_direction: Vector3 = -spawn_marker.global_basis.z
 	snowball.launch(launch_direction)
+
+#endregion
+
+#region Map Functions
+
+func _on_money_spawn_requested(pos: Vector3) -> void:
+	var money_pile = _money_spawner.spawn() as Node3D
+	
+	if money_pile == null:
+		print("Error spawning player")
+		return
+	
+	money_pile.position = pos
 
 #endregion

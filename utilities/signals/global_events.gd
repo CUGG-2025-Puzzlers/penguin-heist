@@ -87,3 +87,12 @@ func request_remove_all_hud() -> void:
 	remove_all_hud_requested.emit()
 
 #endregion
+
+#region Map Events
+signal money_spawn_requested(pos: Vector3)
+
+func request_money_spawn(pos: Vector3):
+	print("Requesting to spawn money pile")
+	money_spawn_requested.emit(pos)
+
+#endregion

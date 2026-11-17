@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dvfppm0lfnaq1" path="res://common/main/main.gd" id="1_v2ws0"]
 [ext_resource type="PackedScene" uid="uid://c3gtpvl27vr4t" path="res://world/maps/test_map/test_map.tscn" id="2_4eugw"]
 [ext_resource type="PackedScene" uid="uid://rpctaayobx1q" path="res://world/items/snowball/snowball.tscn" id="2_es36h"]
+[ext_resource type="PackedScene" uid="uid://c2vrskj1bu6t7" path="res://world/items/money/money_pile.tscn" id="2_gpk2e"]
 [ext_resource type="PackedScene" uid="uid://c6mor2d4870ba" path="res://world/player/character_controller.tscn" id="2_qfc1f"]
 [ext_resource type="PackedScene" uid="uid://dgjirdpi6fp3n" path="res://world/maps/game_lobby/game_lobby.tscn" id="3_5okgu"]
 [ext_resource type="PackedScene" uid="uid://v8ly8nftjqth" path="res://world/maps/bank/bank.tscn" id="4_5okgu"]
@@ -29,6 +30,12 @@ unique_name_in_owner = true
 spawn_map_mode = 0
 spawnable_scenes = Array[PackedScene]([ExtResource("2_4eugw"), ExtResource("3_5okgu"), ExtResource("4_5okgu")])
 unique_name_in_owner = true
+
+[node name="MoneyPileSpawner" type="FusionSpawner" parent="World/MapRoot" unique_id=429755155]
+spawnable_scenes = Array[PackedScene]([ExtResource("2_gpk2e")])
+unique_name_in_owner = true
+
+[node name="HeldItemSpawner" type="FusionSpawner" parent="World/MapRoot" unique_id=876385808]
 
 [node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
 unique_name_in_owner = true
