@@ -7,11 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://c6mor2d4870ba" path="res://world/player/character_controller.tscn" id="2_qfc1f"]
 [ext_resource type="PackedScene" uid="uid://dgjirdpi6fp3n" path="res://world/maps/game_lobby/game_lobby.tscn" id="3_5okgu"]
 [ext_resource type="PackedScene" uid="uid://v8ly8nftjqth" path="res://world/maps/bank/bank.tscn" id="4_5okgu"]
+[ext_resource type="PackedScene" uid="uid://bsmgtg4twoy8j" path="res://world/items/fish/fish.tscn" id="3_4eugw"]
 
 [sub_resource type="Environment" id="Environment_4eugw"]
 background_mode = 1
 background_color = Color(0.49411765, 0.74509805, 0.8784314, 1)
 ambient_light_color = Color(0.21950102, 0.21950102, 0.21950102, 1)
+
 
 [node name="Main" type="Node" unique_id=122788503]
 process_mode = 3
@@ -36,6 +38,8 @@ spawnable_scenes = Array[PackedScene]([ExtResource("2_gpk2e")])
 unique_name_in_owner = true
 
 [node name="HeldItemSpawner" type="FusionSpawner" parent="World/MapRoot" unique_id=876385808]
+spawnable_scenes = Array[PackedScene]([ExtResource("3_4eugw")])
+unique_name_in_owner = true
 
 [node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
 unique_name_in_owner = true
