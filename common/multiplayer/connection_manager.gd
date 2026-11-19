@@ -41,8 +41,10 @@ func _on_connection_status_changed(status: int) -> void:
 func _on_room_joined() -> void:
 	print("Successfully joined room as '%s'" % GameSettings.display_name)
 	
-	GlobalEvents.request_map_change(Map.ID.GAME_LOBBY)
 	_change_menu(Menu.ID.GAME_LOBBY)
+	
+	if Fusion.is_master_client():
+		GlobalEvents.request_map_change(Map.ID.GAME_LOBBY)
 
 func _on_room_left() -> void:
 	print("Left room")

@@ -7,6 +7,7 @@ const Menus: Dictionary[Menu.ID, String] = {
 }
 
 const Maps: Dictionary[Map.ID, String] = {
+	Map.ID.TEST:       "uid://c3gtpvl27vr4t",
 	Map.ID.GAME_LOBBY: "uid://dgjirdpi6fp3n",
 }
 

@@ -14,7 +14,9 @@ extends Node
 # Network Spawners
 @onready var _player_spawner  : FusionSpawner = %PlayerSpawner
 @onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
+@onready var _map_spawner     : FusionSpawner = %MapSpawner
 
+var _player      : PlayerController
 var _current_map : Map
 var _current_menu: Menu
 var _active_huds : Dictionary[HUD.ID, HUD]
@@ -44,6 +46,9 @@ func _ready() -> void:
 ## Event Handler for when a map change is requested.[br]
 ## Attempts to load the map given by [param map_id]
 func _on_map_change_requested(map_id: Map.ID) -> void:
+	if Fusion.is_connected_to_photon() and not Fusion.is_master_client():
+		return
+	
 	var map_name: String = Map.ID.find_key(map_id).capitalize()
 	print("Map change request accepted. Attempting to load map `%s`" % map_name)
 	_load_map(map_id)
@@ -106,7 +111,7 @@ func _load_map(map_id: Map.ID) -> void:
 func _deferred_load_map(map_id: Map.ID) -> void:
 	# Remove the current map
 	if _current_map != null:
-		_current_map.queue_free()
+		_map_spawner.despawn(_current_map)
 		_current_map = null
 		await get_tree().process_frame
 	
@@ -124,7 +129,7 @@ func _deferred_load_map(map_id: Map.ID) -> void:
 		return
 	
 	# Instantiate the new scene
-	_current_map = new_map.instantiate() as Map
+	_current_map = _map_spawner.spawn(new_map) as Map
 	if _current_map == null:
 		var error: String =\
 			"Loaded map `%s` is not of type Map or does not exist" % map_name
@@ -132,7 +137,6 @@ func _deferred_load_map(map_id: Map.ID) -> void:
 		print(error)
 		return
 	
-	_map_root.add_child(_current_map)
 	await get_tree().process_frame
 	
 	# TODO: Start map music
@@ -239,13 +243,16 @@ func _remove_all_hud() -> void:
 ## Spawns the player using the FusionSpawner to allow for networking
 ## Sets the player's position to the position given by [param pos]
 func _spawn_player(pos: Vector3) -> void:
-	var player = _player_spawner.spawn() as Node3D
-	
-	if player == null:
+	if _player != null:
+		_player.global_position = pos
+		return
+		
+	_player = _player_spawner.spawn() as PlayerController
+	if _player == null:
 		print("Error spawning player")
 		return
 	
-	player.position = pos
+	_player.global_position = pos
 
 ## Spawns a snowball using the FusionSpawner to allow for networking
 ## Sets the position to the [param spawn_marker]'s position and launches
