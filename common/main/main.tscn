@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://ndytlmwu8xmc"]
 
 [ext_resource type="Script" uid="uid://dvfppm0lfnaq1" path="res://common/main/main.gd" id="1_v2ws0"]
+[ext_resource type="PackedScene" uid="uid://c3gtpvl27vr4t" path="res://world/maps/test_map/test_map.tscn" id="2_4eugw"]
 [ext_resource type="PackedScene" uid="uid://rpctaayobx1q" path="res://world/items/snowball/snowball.tscn" id="2_es36h"]
 [ext_resource type="PackedScene" uid="uid://c6mor2d4870ba" path="res://world/player/character_controller.tscn" id="2_qfc1f"]
+[ext_resource type="PackedScene" uid="uid://dgjirdpi6fp3n" path="res://world/maps/game_lobby/game_lobby.tscn" id="3_5okgu"]
 
 [sub_resource type="Environment" id="Environment_4eugw"]
 background_mode = 1
@@ -20,6 +22,11 @@ process_mode = 1
 environment = SubResource("Environment_4eugw")
 
 [node name="MapRoot" type="Node3D" parent="World" unique_id=42696137]
+unique_name_in_owner = true
+
+[node name="MapSpawner" type="FusionSpawner" parent="World/MapRoot" unique_id=408891577]
+spawn_map_mode = 0
+spawnable_scenes = Array[PackedScene]([ExtResource("2_4eugw"), ExtResource("3_5okgu")])
 unique_name_in_owner = true
 
 [node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
