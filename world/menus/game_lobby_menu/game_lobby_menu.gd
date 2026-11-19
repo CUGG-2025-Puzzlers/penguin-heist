@@ -37,7 +37,7 @@ func _on_start_game_pressed() -> void:
 	_start_game_button.visible = false
 
 func _on_start_test_pressed() -> void:
-	GlobalEvents.request_map_change(Map.ID.TEST_MAP)
+	GlobalEvents.request_map_change(Map.ID.TEST)
 
 func _on_leave_game_pressed() -> void:
 	Fusion.leave_room()
