@@ -45,6 +45,12 @@ data = PackedVector3Array(2.5, 0, -5, -2.5, 0, -5, 2.5, 5, -5, -2.5, 0, -5, -2.5
 [node name="GameLobby" type="Node3D" unique_id=1308059224]
 script = ExtResource("1_6ja5x")
 
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=2102889422]
+owner_mode = 3
+root_replication_mode = 1
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
 [node name="SpawnBox" type="Node3D" parent="." unique_id=1201969246]
 
 [node name="Floor" type="MeshInstance3D" parent="SpawnBox" unique_id=975460867]
