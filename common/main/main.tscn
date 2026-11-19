@@ -4,12 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://rpctaayobx1q" path="res://world/items/snowball/snowball.tscn" id="2_es36h"]
 [ext_resource type="PackedScene" uid="uid://c6mor2d4870ba" path="res://world/player/character_controller.tscn" id="2_qfc1f"]
 
+[sub_resource type="Environment" id="Environment_4eugw"]
+background_mode = 1
+background_color = Color(0.49411765, 0.74509805, 0.8784314, 1)
+ambient_light_color = Color(0.21950102, 0.21950102, 0.21950102, 1)
+
 [node name="Main" type="Node" unique_id=122788503]
 process_mode = 3
 script = ExtResource("1_v2ws0")
 
 [node name="World" type="Node3D" parent="." unique_id=113801559]
 process_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=2091356110]
+environment = SubResource("Environment_4eugw")
 
 [node name="MapRoot" type="Node3D" parent="World" unique_id=42696137]
 unique_name_in_owner = true
