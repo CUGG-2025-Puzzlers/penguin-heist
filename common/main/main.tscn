@@ -37,11 +37,17 @@ unique_name_in_owner = true
 spawnable_scenes = Array[PackedScene]([ExtResource("2_gpk2e")])
 unique_name_in_owner = true
 
-[node name="HeldItemSpawner" type="FusionSpawner" parent="World/MapRoot" unique_id=876385808]
+[node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
+unique_name_in_owner = true
+
+[node name="MapItemSpawner" type="FusionSpawner" parent="World/EntityRoot" unique_id=837757980]
+spawn_path = NodePath("../HeldItemSpawner")
 spawnable_scenes = Array[PackedScene]([ExtResource("3_4eugw")])
 unique_name_in_owner = true
 
-[node name="EntityRoot" type="Node3D" parent="World" unique_id=126537745]
+[node name="HeldItemSpawner" type="FusionSpawner" parent="World/EntityRoot" unique_id=876385808]
+spawn_path = NodePath("../../MapRoot")
+spawnable_scenes = Array[PackedScene]([ExtResource("3_4eugw")])
 unique_name_in_owner = true
 
 [node name="SnowballSpawner" type="FusionSpawner" parent="World/EntityRoot" unique_id=1770662900]

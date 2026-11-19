@@ -95,4 +95,10 @@ func request_money_spawn(pos: Vector3):
 	print("Requesting to spawn money pile")
 	money_spawn_requested.emit(pos)
 
+signal fish_spawn_requested(pos: Vector3)
+
+func request_fish_spawn(pos: Vector3) -> void:
+	print("Requesting to spawn fish")
+	fish_spawn_requested.emit(pos)
+
 #endregion

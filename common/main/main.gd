@@ -16,6 +16,8 @@ extends Node
 @onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
 @onready var _money_spawner   : FusionSpawner = %MoneyPileSpawner
+@onready var _map_item_spawner: FusionSpawner = %MapItemSpawner
+@onready var _held_item_spawner: FusionSpawner = %MapItemSpawner
 
 var _player      : PlayerController
 var _current_map : Map
@@ -280,9 +282,18 @@ func _on_money_spawn_requested(pos: Vector3) -> void:
 	var money_pile = _money_spawner.spawn() as Node3D
 	
 	if money_pile == null:
-		print("Error spawning player")
+		print("Error spawning money pile")
 		return
 	
 	money_pile.position = pos
 
+func _on_fish_spawn_requested(pos: Vector3) -> void:
+	var fish = _map_item_spawner.get_spawnable_scene(0).spawn() as Node3D #TODO ID the spawnable map items (fish, squid, etc.)
+	
+	if fish == null:
+		print("Error spawning player")
+		return
+	
+	fish.position = pos
+	
 #endregion

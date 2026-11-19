@@ -3,6 +3,7 @@ class_name Map
 extends Node3D
 
 @export var _player_spawn_markers: Array[Marker3D]
+@export var _fish_spawn_markers: Array[Marker3D]
 
 enum ID {
 	NONE,
