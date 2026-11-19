@@ -8,6 +8,8 @@ extends Menu
 const ROOM_CODE_NOT_IN_ROOM: String = "Not In Room..."
 const ROOM_CODE_PREFIX     : String = "Room Code:"
 
+var selected_map: Map.ID
+
 func _ready() -> void:
 	if Fusion.is_master_client():
 		_enable_start_button()
@@ -17,17 +19,20 @@ func _ready() -> void:
 	
 	_spawn_local_player_label()
 	_set_room_code_label_text()
+	
+	# TODO: Change map selection to be from player input
+	selected_map = Map.ID.TEST
 
 #region Event Handlers
 
 func _on_player_left(_player_id: int, _is_inactive: bool) -> void:
 	# Only enable start button when becoming master client
-	if Fusion.is_master_client() and _start_game_button.disabled:
-		print("[%s] I am the Master Client now!" % GameSettings.display_name)
+	if Fusion.is_master_client():
 		_enable_start_button()
 
 func _on_start_game_pressed() -> void:
-	pass
+	GlobalEvents.request_map_change(selected_map)
+	_start_game_button.visible = false
 
 func _on_leave_game_pressed() -> void:
 	Fusion.leave_room()
@@ -36,7 +41,9 @@ func _on_leave_game_pressed() -> void:
 
 func _enable_start_button() -> void:
 	_start_game_button.visible = true
-	_start_game_button.pressed.connect(_on_start_game_pressed)
+	
+	if not _start_game_button.pressed.is_connected(_on_start_game_pressed):
+		_start_game_button.pressed.connect(_on_start_game_pressed)
 
 func _spawn_local_player_label() -> void:
 	var display_name_label: Label = _display_name_label_spawner.spawn() as Label
