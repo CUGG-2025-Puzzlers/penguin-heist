@@ -32,6 +32,7 @@ var freeflying : bool = false
 @onready var _head           : Node3D    = %CharacterHead
 @onready var _face           : Node3D    = %Face
 @onready var _player_camera  : Camera3D  = %PlayerCamera
+@onready var _hand           : Marker3D  = %Hand
 @onready var _raycast        : RayCast3D = %InteractRay
 @onready var _snowball_pos   : Marker3D  = %SnowballPos
 @onready var _item_use_timer : Timer     = %ItemUseTimer
@@ -299,13 +300,13 @@ func activate() -> void:
 	if item and item.has_method("pick_up"):
 		_hide_current_prompt()
 		held_fish = item
-		item.pick_up(_player_camera)
+		item.pick_up(_hand)
 	if item and item.has_method("interact"):
 		_hide_current_prompt()
 		
 		#TODO: change held_fish to held_item
 		held_fish = item 
-		item.pick_up(_player_camera)
+		item.pick_up(_hand)
 
 func slap() -> void:
 	if slapping:

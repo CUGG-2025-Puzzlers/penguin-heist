@@ -86,6 +86,10 @@ unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collide_with_areas = true
 
+[node name="Hand" type="Marker3D" parent="CharacterHead/PlayerCamera" unique_id=1698277592]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.45, -0.4, -0.8)
+
 [node name="SnowballPos" type="Marker3D" parent="CharacterHead" unique_id=1043207918]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
