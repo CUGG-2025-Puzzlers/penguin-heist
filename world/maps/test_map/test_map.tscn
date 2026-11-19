@@ -4,13 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://bsmgtg4twoy8j" path="res://world/items/fish/fish.tscn" id="1_a4i74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sontw"]
+albedo_color = Color(0.5132329, 0.5132329, 0.5132329, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq8a6"]
+albedo_color = Color(0.06149999, 0.21251668, 0.41, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj6nr"]
 albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbqal"]
+albedo_color = Color(0.55, 0.22550002, 0.22550002, 1)
 
 [node name="TestMap" type="Node3D" unique_id=1631430446]
 script = ExtResource("1_6h4uy")
