@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody3D
 ## Based on the ProtoController
 
