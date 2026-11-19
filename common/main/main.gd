@@ -16,6 +16,7 @@ extends Node
 @onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
 
+var _player      : PlayerController
 var _current_map : Map
 var _current_menu: Menu
 var _active_huds : Dictionary[HUD.ID, HUD]
@@ -242,13 +243,16 @@ func _remove_all_hud() -> void:
 ## Spawns the player using the FusionSpawner to allow for networking
 ## Sets the player's position to the position given by [param pos]
 func _spawn_player(pos: Vector3) -> void:
-	var player = _player_spawner.spawn() as Node3D
-	
-	if player == null:
+	if _player != null:
+		_player.global_position = pos
+		return
+		
+	_player = _player_spawner.spawn() as PlayerController
+	if _player == null:
 		print("Error spawning player")
 		return
 	
-	player.position = pos
+	_player.global_position = pos
 
 ## Spawns a snowball using the FusionSpawner to allow for networking
 ## Sets the position to the [param spawn_marker]'s position and launches
