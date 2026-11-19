@@ -11,12 +11,15 @@ enum ID {
 }
 
 func _ready() -> void:
-	GlobalEvents.request_player_spawn(_get_spawn_position())
+	# Requests that the player be spawned once the map is added to the tree
+	var player_spawn_pos = _get_random_spawn_position(_player_spawn_markers)
+	GlobalEvents.request_player_spawn(player_spawn_pos)
 
-func _get_spawn_position() -> Vector3:
-	if _player_spawn_markers.size() == 0:
-		push_warning("No spawn markers set for this map, players will spawn at the origin")
+## Returns the position of a random Marker3D from the given list
+## Returns Vector3.Zero if there are no markers to choose from
+func _get_random_spawn_position(markers: Array[Marker3D]) -> Vector3:
+	if markers.size() == 0:
 		return Vector3.ZERO
 	
-	var index = randi() % _player_spawn_markers.size()
-	return _player_spawn_markers[index].global_position
+	var index = randi() % markers.size()
+	return markers[index].global_position
