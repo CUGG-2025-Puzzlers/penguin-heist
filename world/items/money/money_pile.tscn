@@ -1,13 +1,27 @@
 [gd_scene format=3 uid="uid://c2vrskj1bu6t7"]
 
-[ext_resource type="Script" uid="uid://ctly4x6dv3j12" path="res://world/items/money/pile.gd" id="1_5gfrf"]
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_5gfrf"]
+property_count = 1
+properties/0/path = NodePath(":count")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6v6b"]
 albedo_color = Color(0, 1, 0, 1)
 
 [node name="MoneyPile" type="Node3D" unique_id=1810272163]
-script = ExtResource("1_5gfrf")
-count = null
+
+[node name="Replicator" type="FusionSharedReplicator" parent="." unique_id=854207023]
+owner_mode = 1
+replication_config = SubResource("FusionReplicationConfig_5gfrf")
+root_replication_mode = 1
+root_interpolation_mode = 2
+unique_name_in_owner = true
+process_priority = -2147483647
+process_physics_priority = -2147483647
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=916274982]
 use_collision = true
