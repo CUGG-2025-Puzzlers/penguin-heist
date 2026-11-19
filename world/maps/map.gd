@@ -2,9 +2,24 @@
 class_name Map
 extends Node3D
 
+@export var _player_spawn_markers: Array[Marker3D]
 
-#region Abstract Methods
+enum ID {
+	NONE,
+	TEST,
+	GAME_LOBBY,
+}
 
-@abstract func spawn_players() -> void
+func _ready() -> void:
+	# Requests that the player be spawned once the map is added to the tree
+	var player_spawn_pos = _get_random_spawn_position(_player_spawn_markers)
+	GlobalEvents.request_player_spawn(player_spawn_pos)
 
-#endregion
+## Returns the position of a random Marker3D from the given list
+## Returns Vector3.Zero if there are no markers to choose from
+func _get_random_spawn_position(markers: Array[Marker3D]) -> Vector3:
+	if markers.size() == 0:
+		return Vector3.ZERO
+	
+	var index = randi() % markers.size()
+	return markers[index].global_position

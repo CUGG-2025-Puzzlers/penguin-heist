@@ -1,3 +1,9 @@
 @abstract
 class_name Menu
-extends Node
+extends Control
+
+enum ID {
+	CONNECTION,
+	ROOM_SELECT,
+	GAME_LOBBY,
+}
