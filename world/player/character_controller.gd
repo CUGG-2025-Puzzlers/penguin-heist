@@ -40,7 +40,7 @@ var freeflying : bool = false
 @onready var _replicator : FusionSharedReplicator = %CharacterReplicator
 
 var current_interactable = null
-var held_fish = null
+var held_item = null
 var can_throw : bool = true
 var slapping  : bool = false
 
@@ -269,7 +269,7 @@ func _hide_current_prompt() -> void:
 func _use_held_item() -> void:
 	# TODO: Refactor item use logic to individual item scripts and just call
 	# held_item.use() or equivalent
-	if held_fish:
+	if held_item is Fish:
 		slap()
 		return
 
@@ -283,9 +283,9 @@ func _on_item_use_timer_timeout() -> void:
 	can_throw = true
 
 func activate() -> void:
-	if held_fish:
-		held_fish.drop()
-		held_fish = null
+	if held_item:
+		held_item.drop()
+		held_item = null
 		return
 
 	if not _raycast.is_colliding():
@@ -297,13 +297,13 @@ func activate() -> void:
 
 	if hit and hit.has_method("pick_up"):
 		_hide_current_prompt()
-		held_fish = hit
+		held_item = hit
 		hit.pick_up(_hand)
 	if hit and hit.has_method("pick_up"):
 		_hide_current_prompt()
 		
-		#TODO: change held_fish to held_item
-		held_fish = hit 
+		#TODO: change held_item to held_item
+		held_item = hit 
 		hit.pick_up(_hand)
 
 func slap() -> void:
@@ -312,8 +312,8 @@ func slap() -> void:
 
 	slapping = true
 	var swing = create_tween()
-	swing.tween_property(held_fish, "rotation_degrees:y", 180.0 + 65.0, 0.10)
-	swing.tween_property(held_fish, "rotation_degrees:y", 180.0, 0.18)
+	swing.tween_property(held_item, "rotation_degrees:y", 180.0 + 65.0, 0.10)
+	swing.tween_property(held_item, "rotation_degrees:y", 180.0, 0.18)
 
 	_raycast.force_raycast_update()
 	var target = _raycast.get_collider()
