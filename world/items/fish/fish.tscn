@@ -29,6 +29,7 @@ replication_config = SubResource("FusionReplicationConfig_v2clv")
 root_replication_mode = 1
 root_interpolation_mode = 0
 root_forecast_gravity = false
+sync_sleeping = false
 unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647

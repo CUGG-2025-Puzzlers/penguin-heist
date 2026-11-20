@@ -33,6 +33,7 @@ script = ExtResource("1_risaw")
 replication_config = SubResource("FusionReplicationConfig_risaw")
 root_replication_mode = 1
 root_interpolation_mode = 0
+sync_sleeping = false
 unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647

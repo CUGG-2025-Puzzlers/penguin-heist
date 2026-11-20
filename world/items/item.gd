@@ -44,6 +44,8 @@ func drop() -> void:
 		hand = null
 		
 	is_held = false
+	
+	self.sleeping = false
 
 func _apply_held_state() -> void:
 	if is_held:
