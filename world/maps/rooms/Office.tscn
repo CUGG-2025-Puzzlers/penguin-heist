@@ -62,12 +62,6 @@ operation = 2
 size = Vector3(2.5, 2.6000001, 1.1)
 material = SubResource("StandardMaterial3D_door2")
 
-[node name="Door Hole2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=102659654]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.8, 22)
-operation = 2
-size = Vector3(2.5, 2.6000001, 1.1)
-material = SubResource("StandardMaterial3D_door2")
-
 [node name="Desk" type="CSGBox3D" parent="CSGCombiner3D" unique_id=274903815]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 20.6)
 size = Vector3(4, 1, 1.6)
