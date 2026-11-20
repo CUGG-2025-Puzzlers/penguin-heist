@@ -14,7 +14,6 @@ background_mode = 1
 background_color = Color(0.49411765, 0.74509805, 0.8784314, 1)
 ambient_light_color = Color(0.21950102, 0.21950102, 0.21950102, 1)
 
-
 [node name="Main" type="Node" unique_id=122788503]
 process_mode = 3
 script = ExtResource("1_v2ws0")

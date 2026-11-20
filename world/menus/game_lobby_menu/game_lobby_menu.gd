@@ -3,7 +3,6 @@ extends Menu
 @onready var _display_name_label_spawner: FusionSpawner = %DisplayNameLabelSpawner
 @onready var _room_code_label: Label = %RoomCodeLabel
 @onready var _start_game_button: Button = %StartGameButton
-@onready var _start_test_button: Button = %StartTestButton
 @onready var _leave_game_button: Button = %LeaveGameButton
 
 const ROOM_CODE_NOT_IN_ROOM: String = "Not In Room..."
@@ -14,7 +13,6 @@ var selected_map: Map.ID
 func _ready() -> void:
 	if Fusion.is_master_client():
 		_enable_start_button()
-		_enable_start_test_button()
 	
 	_leave_game_button.pressed.connect(_on_leave_game_pressed)
 	Fusion.player_left.connect(_on_player_left)
@@ -35,9 +33,6 @@ func _on_player_left(_player_id: int, _is_inactive: bool) -> void:
 func _on_start_game_pressed() -> void:
 	GlobalEvents.request_map_change(selected_map)
 	_start_game_button.visible = false
-
-func _on_start_test_pressed() -> void:
-	GlobalEvents.request_map_change(Map.ID.TEST)
 
 func _on_leave_game_pressed() -> void:
 	Fusion.leave_room()

@@ -17,7 +17,7 @@ extends Node
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
 @onready var _money_spawner   : FusionSpawner = %MoneyPileSpawner
 @onready var _map_item_spawner: FusionSpawner = %MapItemSpawner
-@onready var _held_item_spawner: FusionSpawner = %MapItemSpawner
+@onready var _held_item_spawner: FusionSpawner = %HeldItemSpawner
 
 var _player      : PlayerController
 var _current_map : Map
@@ -40,6 +40,7 @@ func _ready() -> void:
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
 	GlobalEvents.money_spawn_requested.connect(_on_money_spawn_requested)
+	GlobalEvents.fish_spawn_requested.connect(_on_fish_spawn_requested)
 
 	# TODO: Load main menu when not debugging
 	_load_menu(Menu.ID.CONNECTION)
@@ -285,15 +286,15 @@ func _on_money_spawn_requested(pos: Vector3) -> void:
 		print("Error spawning money pile")
 		return
 	
-	money_pile.position = pos
+	money_pile.global_position = pos
 
 func _on_fish_spawn_requested(pos: Vector3) -> void:
-	var fish = _map_item_spawner.get_spawnable_scene(0).spawn() as Node3D #TODO ID the spawnable map items (fish, squid, etc.)
+	var fish = _map_item_spawner.spawn() #TODO ID the spawnable map items (fish, squid, etc.)
 	
 	if fish == null:
-		print("Error spawning player")
+		print("Error spawning fish")
 		return
 	
-	fish.position = pos
+	fish.global_position = pos
 	
 #endregion

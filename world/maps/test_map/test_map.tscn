@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c3gtpvl27vr4t"]
 
 [ext_resource type="Script" uid="uid://drlca3be4avwb" path="res://world/maps/test_map/test_map.gd" id="1_6h4uy"]
-[ext_resource type="PackedScene" uid="uid://bsmgtg4twoy8j" path="res://world/items/fish/fish.tscn" id="1_a4i74"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sontw"]
 albedo_color = Color(0.5132329, 0.5132329, 0.5132329, 1)
@@ -9,15 +8,18 @@ albedo_color = Color(0.5132329, 0.5132329, 0.5132329, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq8a6"]
 albedo_color = Color(0.06149999, 0.21251668, 0.41, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj6nr"]
-albedo_color = Color(0, 1, 0, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbqal"]
 albedo_color = Color(0.55, 0.22550002, 0.22550002, 1)
 
-[node name="TestMap" type="Node3D" unique_id=1631430446 node_paths=PackedStringArray("_player_spawn_markers")]
+[node name="TestMap" type="Node3D" unique_id=1631430446 node_paths=PackedStringArray("_player_spawn_markers", "_fish_spawn_markers")]
 script = ExtResource("1_6h4uy")
 _player_spawn_markers = [NodePath("PlayerSpawnMarkers/Spawn1"), NodePath("PlayerSpawnMarkers/Spawn2"), NodePath("PlayerSpawnMarkers/Spawn3"), NodePath("PlayerSpawnMarkers/Spawn4")]
+_fish_spawn_markers = [NodePath("FishSpawnMarkers/FishSpawn1")]
+
+[node name="FishSpawnMarkers" type="Node3D" parent="." unique_id=1420967572]
+
+[node name="FishSpawn1" type="Marker3D" parent="FishSpawnMarkers" unique_id=1219265306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -1.6)
 
 [node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1935663798]
 owner_mode = 3
@@ -49,7 +51,6 @@ gizmo_extents = 0.86
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=819369266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="CSGCombiner3D" unique_id=384803664]
@@ -72,9 +73,6 @@ operation = 2
 radius = 2.7
 height = 1.3
 sides = 16
-
-[node name="Fish" parent="CSGCombiner3D" unique_id=372867731 instance=ExtResource("1_a4i74")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -1.6)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=13363024]
 transform = Transform3D(0.33309853, 0.32072234, 0.88666934, 0, -0.9403721, 0.34014747, 0.942892, -0.11330262, -0.31323656, 0, 0, 0)
