@@ -32,6 +32,7 @@ var freeflying : bool = false
 @onready var _head           : Node3D    = %CharacterHead
 @onready var _face           : Node3D    = %Face
 @onready var _player_camera  : Camera3D  = %PlayerCamera
+@onready var _hand           : Marker3D  = %Hand
 @onready var _raycast        : RayCast3D = %InteractRay
 @onready var _snowball_pos   : Marker3D  = %SnowballPos
 @onready var _item_use_timer : Timer     = %ItemUseTimer
@@ -39,7 +40,7 @@ var freeflying : bool = false
 @onready var _replicator : FusionSharedReplicator = %CharacterReplicator
 
 var current_interactable = null
-var held_fish = null
+var held_item = null
 var can_throw : bool = true
 var slapping  : bool = false
 
@@ -237,26 +238,24 @@ func _check_input_mappings() -> void:
 
 func _check_hover_collision() -> void:
 	if not _raycast.is_colliding():
+		_hide_current_prompt()
 		return
 	
 	var collider: Object = _raycast.get_collider()
 	if not collider:
 		return
 	
-	# TODO: Check if collider parent is an Interactable instead of checking if
-	# 		it has an "interact" method 
-	var item = collider.get_parent()
-	if not item.has_method("interact"):
-		item = null
+	if not (collider is Interactable):
+		collider = null
 
-	if item == current_interactable:
+	if collider == current_interactable:
 		return
 	
 	# TODO: Move prompt to player HUD
 	_hide_current_prompt()
 
-	if item:
-		current_interactable = item
+	if collider:
+		current_interactable = collider
 		current_interactable.show_prompt()
 
 func _hide_current_prompt() -> void:
@@ -269,9 +268,12 @@ func _hide_current_prompt() -> void:
 func _use_held_item() -> void:
 	# TODO: Refactor item use logic to individual item scripts and just call
 	# held_item.use() or equivalent
-	if held_fish:
+	if held_item is Fish:
 		slap()
 		return
+
+	if held_item is Cash:
+		return #Maybe add throw function here?
 
 	if can_throw:
 		can_throw = false
@@ -283,9 +285,9 @@ func _on_item_use_timer_timeout() -> void:
 	can_throw = true
 
 func activate() -> void:
-	if held_fish:
-		held_fish.drop()
-		held_fish = null
+	if held_item:
+		held_item.drop()
+		held_item = null
 		return
 
 	if not _raycast.is_colliding():
@@ -295,11 +297,15 @@ func activate() -> void:
 	if hit == null:
 		return
 
-	var item = hit.get_parent()
-	if item and item.has_method("pick_up"):
+	if hit and hit is Interactable:
 		_hide_current_prompt()
-		held_fish = item
-		item.pick_up(_player_camera)
+		hit.interact(_hand, self)
+
+func pick_up(item: RigidBody3D) -> void:
+	if held_item:
+		held_item.drop()
+	
+	held_item = item
 
 func slap() -> void:
 	if slapping:
@@ -307,8 +313,8 @@ func slap() -> void:
 
 	slapping = true
 	var swing = create_tween()
-	swing.tween_property(held_fish, "rotation_degrees:y", 180.0 + 65.0, 0.10)
-	swing.tween_property(held_fish, "rotation_degrees:y", 180.0, 0.18)
+	swing.tween_property(held_item, "rotation_degrees:y", 180.0 + 65.0, 0.10)
+	swing.tween_property(held_item, "rotation_degrees:y", 180.0, 0.18)
 
 	_raycast.force_raycast_update()
 	var target = _raycast.get_collider()

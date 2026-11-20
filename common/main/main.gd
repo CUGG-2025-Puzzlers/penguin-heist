@@ -15,6 +15,8 @@ extends Node
 @onready var _player_spawner  : FusionSpawner = %PlayerSpawner
 @onready var _snowball_spawner: FusionSpawner = %SnowballSpawner
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
+@onready var _money_spawner   : FusionSpawner = %MoneyPileSpawner
+@onready var _map_item_spawner: FusionSpawner = %MapItemSpawner
 
 var _player      : PlayerController
 var _current_map : Map
@@ -36,6 +38,10 @@ func _ready() -> void:
 	GlobalEvents.player_spawn_requested.connect(_on_player_spawn_requested)
 	GlobalEvents.snowball_throw_requested.connect(_on_snowball_throw_requested)
 	
+	GlobalEvents.money_spawn_requested.connect(_on_money_spawn_requested)
+	GlobalEvents.fish_spawn_requested.connect(_on_fish_spawn_requested)
+	GlobalEvents.cash_spawn_requested.connect(_on_cash_spawn_requested)
+
 	# TODO: Load main menu when not debugging
 	_load_menu(Menu.ID.CONNECTION)
 
@@ -268,5 +274,39 @@ func _throw_snowball(spawn_marker: Marker3D) -> void:
 	snowball.global_position = spawn_marker.global_position
 	var launch_direction: Vector3 = -spawn_marker.global_basis.z
 	snowball.launch(launch_direction)
+
+#endregion
+
+#region Map Functions
+
+func _on_money_spawn_requested(pos: Vector3) -> void:
+	var money_pile = _money_spawner.spawn() as Node3D
+	money_pile.set_spawner(_money_spawner)
+	
+	if money_pile == null:
+		print("Error spawning money pile")
+		return
+	
+	money_pile.global_position = pos
+
+func _on_fish_spawn_requested(pos: Vector3) -> void:
+	var fish = _map_item_spawner.spawn(_map_item_spawner.get_spawnable_scene(Item.ID.FISH)) as Fish
+	
+	if fish == null:
+		print("Error spawning fish")
+		return
+	
+	fish.global_position = pos
+	
+func _on_cash_spawn_requested(hand: Marker3D, player: CharacterBody3D) -> void:
+	var cash = _map_item_spawner.spawn(_map_item_spawner.get_spawnable_scene(Item.ID.CASH)) as Cash
+	
+	if cash == null:
+		print("Error spawning cash")
+		return
+	
+	cash.interact(hand, player)
+	
+	cash.global_position = hand.position
 
 #endregion

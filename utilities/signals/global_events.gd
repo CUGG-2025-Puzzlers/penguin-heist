@@ -87,3 +87,24 @@ func request_remove_all_hud() -> void:
 	remove_all_hud_requested.emit()
 
 #endregion
+
+#region Map Events
+signal money_spawn_requested(pos: Vector3)
+
+func request_money_spawn(pos: Vector3):
+	print("Requesting to spawn money pile")
+	money_spawn_requested.emit(pos)
+
+signal fish_spawn_requested(pos: Vector3)
+
+func request_fish_spawn(pos: Vector3) -> void:
+	print("Requesting to spawn fish")
+	fish_spawn_requested.emit(pos)
+
+signal cash_spawn_requested(pos: Vector3)
+
+func request_cash_spawn(hand: Marker3D, player: CharacterBody3D) -> void:
+	print("Requesting to spawn cash")
+	cash_spawn_requested.emit(hand, player)
+
+#endregion
