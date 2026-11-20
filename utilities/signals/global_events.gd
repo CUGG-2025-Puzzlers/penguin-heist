@@ -101,4 +101,10 @@ func request_fish_spawn(pos: Vector3) -> void:
 	print("Requesting to spawn fish")
 	fish_spawn_requested.emit(pos)
 
+signal cash_spawn_requested(pos: Vector3)
+
+func request_cash_spawn(hand: Marker3D, player: CharacterBody3D) -> void:
+	print("Requesting to spawn cash")
+	cash_spawn_requested.emit(hand, player)
+
 #endregion

@@ -11,10 +11,11 @@ albedo_color = Color(0.06149999, 0.21251668, 0.41, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbqal"]
 albedo_color = Color(0.55, 0.22550002, 0.22550002, 1)
 
-[node name="TestMap" type="Node3D" unique_id=1631430446 node_paths=PackedStringArray("_player_spawn_markers", "_fish_spawn_markers")]
+[node name="TestMap" type="Node3D" unique_id=1631430446 node_paths=PackedStringArray("_player_spawn_markers", "_fish_spawn_markers", "_money_spawn_markers")]
 script = ExtResource("1_6h4uy")
 _player_spawn_markers = [NodePath("PlayerSpawnMarkers/Spawn1"), NodePath("PlayerSpawnMarkers/Spawn2"), NodePath("PlayerSpawnMarkers/Spawn3"), NodePath("PlayerSpawnMarkers/Spawn4")]
 _fish_spawn_markers = [NodePath("FishSpawnMarkers/FishSpawn1")]
+_money_spawn_markers = [NodePath("SpawnMoneyPile")]
 
 [node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1935663798]
 owner_mode = 3

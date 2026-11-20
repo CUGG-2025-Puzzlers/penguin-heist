@@ -11,6 +11,11 @@ var is_held: bool:
 		is_held = value
 		_apply_held_state()
 
+enum ID { 
+   FISH = 0,
+	CASH = 1,
+}
+
 func _ready() -> void:
 	old_layer = 1
 	old_mask = 1
@@ -22,13 +27,14 @@ func _process(delta: float) -> void:
 	if is_instance_valid(hand) and replicator.has_authority():
 		global_transform = hand.global_transform
 
-func pick_up(new_hand: Marker3D) -> void:
+func interact(new_hand: Marker3D, player) -> void:
 	print("Picked up fish")
 	replicator.want_authority(true)
 	while not replicator.has_authority():
 		await get_tree().process_frame
 	prompt.hide()
 	hand = new_hand
+	player.pick_up(self)
 	is_held = true
 
 func drop() -> void:

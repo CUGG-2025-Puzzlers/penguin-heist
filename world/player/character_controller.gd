@@ -244,9 +244,7 @@ func _check_hover_collision() -> void:
 	if not collider:
 		return
 	
-	# TODO: Check if collider parent is an Interactable instead of checking if
-	# 		it has an "interact" method 
-	if not (collider.has_method("interact") or collider.has_method("pick_up")):
+	if not (collider is Interactable):
 		collider = null
 
 	if collider == current_interactable:
@@ -273,6 +271,9 @@ func _use_held_item() -> void:
 		slap()
 		return
 
+	if held_item is Cash:
+		return #Maybe add throw function here?
+
 	if can_throw:
 		can_throw = false
 		_item_use_timer.start()
@@ -295,16 +296,15 @@ func activate() -> void:
 	if hit == null:
 		return
 
-	if hit and hit.has_method("pick_up"):
+	if hit and hit is Interactable:
 		_hide_current_prompt()
-		held_item = hit
-		hit.pick_up(_hand)
-	if hit and hit.has_method("pick_up"):
-		_hide_current_prompt()
-		
-		#TODO: change held_item to held_item
-		held_item = hit 
-		hit.pick_up(_hand)
+		hit.interact(_hand, self)
+
+func pick_up(item: RigidBody3D) -> void:
+	if held_item:
+		held_item.drop()
+	
+	held_item = item
 
 func slap() -> void:
 	if slapping:

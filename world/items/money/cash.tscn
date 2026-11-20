@@ -20,6 +20,9 @@ properties/1/element_class_name = ""
 [sub_resource type="BoxMesh" id="BoxMesh_risaw"]
 size = Vector3(0.2, 0.1, 0.1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2clv"]
+albedo_color = Color(0, 1, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_l6v6b"]
 size = Vector3(0.2, 0.1, 0.1)
 
@@ -28,7 +31,8 @@ script = ExtResource("1_risaw")
 
 [node name="Replicator" type="FusionSharedReplicator" parent="." unique_id=1442845957]
 replication_config = SubResource("FusionReplicationConfig_risaw")
-root_interpolation_mode = 2
+root_replication_mode = 1
+root_interpolation_mode = 0
 unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
@@ -42,6 +46,7 @@ text = "E to pick up"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=352375258]
 mesh = SubResource("BoxMesh_risaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_v2clv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1973198733]
 shape = SubResource("BoxShape3D_l6v6b")

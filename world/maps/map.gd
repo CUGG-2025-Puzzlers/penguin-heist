@@ -4,6 +4,7 @@ extends Node3D
 
 @export var _player_spawn_markers: Array[Marker3D]
 @export var _fish_spawn_markers: Array[Marker3D]
+@export var _money_spawn_markers: Array[Marker3D]
 
 enum ID {
 	NONE,
@@ -18,6 +19,7 @@ func _ready() -> void:
 	GlobalEvents.request_player_spawn(player_spawn_pos)
 	if (Fusion.is_master_client()):
 		_spawn_fish()
+		_spawn_money_pile()
 
 ## Returns the position of a random Marker3D from the given list
 ## Returns Vector3.Zero if there are no markers to choose from
@@ -33,4 +35,11 @@ func _spawn_fish() -> void:
 	for fish_spawn_marker in _fish_spawn_markers:
 		print("Spawning fish #" + str(i))
 		GlobalEvents.request_fish_spawn(fish_spawn_marker.global_position)
+		i += 1
+
+func _spawn_money_pile() -> void:
+	var i = 1
+	for money_spawn_marker in _money_spawn_markers:
+		print("Spawning money pile #" + str(i))
+		GlobalEvents.request_money_spawn(money_spawn_marker.global_position)
 		i += 1

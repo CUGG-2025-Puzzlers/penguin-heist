@@ -1,18 +1,28 @@
 [gd_scene format=3 uid="uid://c2vrskj1bu6t7"]
 
+[ext_resource type="Script" uid="uid://ctly4x6dv3j12" path="res://world/items/money/money_pile.gd" id="1_5gfrf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5gfrf"]
+
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_5gfrf"]
 property_count = 1
-properties/0/path = NodePath(":count")
+properties/0/path = NodePath(":script")
 properties/0/max_array_capacity = 0
 properties/0/interface_tag = ""
 properties/0/interpolate = 0
 properties/0/element_type = 0
 properties/0/element_class_name = ""
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6v6b"]
+[sub_resource type="BoxMesh" id="BoxMesh_l6v6b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhwd4"]
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="MoneyPile" type="Node3D" unique_id=1810272163]
+[node name="MoneyPile" type="RigidBody3D" unique_id=1359435363]
+script = ExtResource("1_5gfrf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=194448712]
+shape = SubResource("BoxShape3D_5gfrf")
 
 [node name="Replicator" type="FusionSharedReplicator" parent="." unique_id=854207023]
 owner_mode = 1
@@ -23,15 +33,12 @@ unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=916274982]
-use_collision = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1565285621]
-material = SubResource("StandardMaterial3D_l6v6b")
-
 [node name="Label3D" type="Label3D" parent="." unique_id=2047280137]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-visible = false
 billboard = 1
 text = "E to pick up"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1160297571]
+mesh = SubResource("BoxMesh_l6v6b")
+surface_material_override/0 = SubResource("StandardMaterial3D_lhwd4")
