@@ -1,9 +1,17 @@
 [gd_scene format=3 uid="uid://cggb381w5poes"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_b7yed"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sontw"]
-albedo_color = Color(0.82, 0.82, 0.82, 1)
+albedo_color = Color(0.62, 0.64, 0.68, 1)
+metallic = 0.5
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hndl1"]
+albedo_color = Color(0.75, 0.6, 0.25, 1)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hzrd1"]
+albedo_color = Color(0.95, 0.75, 0.1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj6nr"]
 albedo_color = Color(0, 0.7294118, 0, 1)
@@ -18,8 +26,10 @@ albedo_color = Color(0.8392157, 0.8901961, 1, 1)
 albedo_color = Color(0.3526, 0.3602533, 0.41, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8s5ki"]
+albedo_color = Color(0.55, 0.57, 0.6, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgdt2"]
+albedo_color = Color(0.3, 0.32, 0.35, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5pyx"]
 albedo_color = Color(1.4211367, 1.1797094, 0, 1)
@@ -28,15 +38,7 @@ metallic_specular = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6v6b"]
 
-[sub_resource type="Environment" id="Environment_b7yed"]
-ambient_light_source = 2
-ambient_light_color = Color(0.93536365, 0.93359303, 0.97938424, 1)
-ambient_light_energy = 0.8
-
-[node name="Entrance" type="Node3D" unique_id=510669196]
-
-[node name="ProtoController" parent="." unique_id=1263997072 instance=ExtResource("1_b7yed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.3, 21.8)
+[node name="Safe" type="Node3D" unique_id=510669196]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=484807707]
 use_collision = true
@@ -227,6 +229,53 @@ radius = 1.2
 height = 1.25
 sides = 16
 
+[node name="Vault Handle1" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1203948571]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8.7, 0.85, 26.325)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Vault Handle2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=618293740]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8.7, 0.85, 21.725)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Vault Handle3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1475920386]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 8.7, 0.85, 17.525)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Vault Handle4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=902384615]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.2, 0.85, 26.325)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Vault Handle5" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1738290465]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.2, 0.85, 21.725)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Vault Handle6" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=429105738]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 3.5527137e-15, 13.2, 0.85, 17.525)
+radius = 0.35
+height = 0.15
+sides = 12
+material = SubResource("StandardMaterial3D_hndl1")
+
+[node name="Hazard Strip" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1092837465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -0.48, 28.5)
+size = Vector3(2.6, 0.04, 0.3)
+material = SubResource("StandardMaterial3D_hzrd1")
+
 [node name="CCTV" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1496994491]
 transform = Transform3D(0.76604444, -0.4131759, 0.49240384, 0, 0.76604444, 0.6427876, -0.6427876, -0.4924039, 0.5868241, 18.99143, 2.2011094, 28.824411)
 size = Vector3(0.3, 0.3, 0.5)
@@ -289,6 +338,3 @@ shadow_enabled = true
 spot_range = 4.0
 spot_attenuation = 2.0
 spot_angle = 62.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=395338415]
-environment = SubResource("Environment_b7yed")

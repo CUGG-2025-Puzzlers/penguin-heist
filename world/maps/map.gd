@@ -8,6 +8,7 @@ enum ID {
 	NONE,
 	TEST,
 	GAME_LOBBY,
+	Bank,
 }
 
 func _ready() -> void:

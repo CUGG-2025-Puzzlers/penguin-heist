@@ -1,11 +1,9 @@
-[gd_scene format=3]
-
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_sec01"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall1"]
+[gd_scene format=3 uid="uid://d1w5ciq1ogcqt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
 albedo_color = Color(0.3526, 0.3602533, 0.41, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door1"]
 
@@ -26,15 +24,7 @@ albedo_color = Color(0.25, 0.32, 0.42, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cctv1"]
 
-[sub_resource type="Environment" id="Environment_sec01"]
-ambient_light_source = 2
-ambient_light_color = Color(0.93536365, 0.93359303, 0.97938424, 1)
-ambient_light_energy = 0.4
-
 [node name="Security" type="Node3D" unique_id=1738204561]
-
-[node name="ProtoController" parent="." unique_id=902617334 instance=ExtResource("1_sec01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.3, 24.5)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1460931827]
 use_collision = true
@@ -154,6 +144,3 @@ light_color = Color(0.45, 0.7, 1, 1)
 light_energy = 0.8
 omni_range = 4.0
 omni_attenuation = 2.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357902468]
-environment = SubResource("Environment_sec01")
