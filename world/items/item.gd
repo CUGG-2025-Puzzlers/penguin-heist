@@ -1,3 +1,4 @@
+class_name Item
 extends Interactable
 
 @onready var replicator: FusionSharedReplicator = %Replicator
@@ -9,7 +10,7 @@ var is_held: bool:
 	set(value):
 		is_held = value
 		_apply_held_state()
- 
+
 func _ready() -> void:
 	old_layer = 1
 	old_mask = 1

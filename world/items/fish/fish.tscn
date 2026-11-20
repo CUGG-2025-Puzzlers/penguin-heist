@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsmgtg4twoy8j"]
 
 [ext_resource type="PackedScene" uid="uid://dju1e2uxrvme3" path="res://world/items/fish/Fish by Poly by Google - aEyLrUMMoUK.glb" id="1_np3ai"]
-[ext_resource type="Script" uid="uid://doiy2q22pq6f1" path="res://world/items/item.gd" id="1_v2clv"]
+[ext_resource type="Script" uid="uid://bo63mq1fco3lu" path="res://world/items/fish/fish.gd" id="1_v2clv"]
 
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_v2clv"]
 property_count = 2
@@ -28,6 +28,7 @@ script = ExtResource("1_v2clv")
 replication_config = SubResource("FusionReplicationConfig_v2clv")
 root_replication_mode = 1
 root_interpolation_mode = 0
+root_forecast_gravity = false
 unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
