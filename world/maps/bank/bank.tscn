@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://v8ly8nftjqth"]
+
+[ext_resource type="Script" uid="uid://xswtwlyf4vgb" path="res://world/maps/bank/bank.gd" id="1_i5hdh"]
+[ext_resource type="PackedScene" uid="uid://dirsil2benw3j" path="res://world/maps/rooms/Entrance.tscn" id="2_rdmhx"]
+[ext_resource type="PackedScene" uid="uid://dg85rojn1nobx" path="res://world/maps/rooms/Hallway.tscn" id="3_hbdvm"]
+[ext_resource type="PackedScene" uid="uid://cggb381w5poes" path="res://world/maps/rooms/Safe.tscn" id="4_oa2u1"]
+[ext_resource type="PackedScene" uid="uid://d1w5ciq1ogcqt" path="res://world/maps/rooms/Security.tscn" id="5_n5p7n"]
+[ext_resource type="PackedScene" uid="uid://ccbg2pf0vtams" path="res://world/maps/rooms/Office.tscn" id="6_mc3dx"]
+
+[sub_resource type="Environment" id="Environment_a7qfo"]
+ambient_light_source = 2
+ambient_light_color = Color(0.98803645, 0.98624766, 0.9960334, 1)
+ambient_light_energy = 0.8
+
+[node name="Bank" type="Node3D" unique_id=801463147 node_paths=PackedStringArray("_player_spawn_markers")]
+script = ExtResource("1_i5hdh")
+_player_spawn_markers = [NodePath("PlayerSpawnMarker/Marker3D"), NodePath("PlayerSpawnMarker/Marker3D2"), NodePath("PlayerSpawnMarker/Marker3D3"), NodePath("PlayerSpawnMarker/Marker3D4")]
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1859141942]
+owner_mode = 3
+root_replication_mode = 1
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=481248984]
+environment = SubResource("Environment_a7qfo")
+
+[node name="Entrance" parent="." unique_id=510669196 instance=ExtResource("2_rdmhx")]
+
+[node name="Hallway" parent="." unique_id=1810149097 instance=ExtResource("3_hbdvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -15.5)
+
+[node name="Safe" parent="." unique_id=1068338832 instance=ExtResource("4_oa2u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -31)
+
+[node name="Security" parent="." unique_id=1738204561 instance=ExtResource("5_n5p7n")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40, 0, -4.5)
+
+[node name="Office" parent="." unique_id=1172093846 instance=ExtResource("6_mc3dx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -21, 0, 17.5)
+
+[node name="PlayerSpawnMarker" type="Node3D" parent="." unique_id=671135518]
+
+[node name="Marker3D" type="Marker3D" parent="PlayerSpawnMarker" unique_id=267797832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 33)
+
+[node name="Marker3D2" type="Marker3D" parent="PlayerSpawnMarker" unique_id=1641263665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.5, 33)
+
+[node name="Marker3D3" type="Marker3D" parent="PlayerSpawnMarker" unique_id=1151500203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 34.5)
+
+[node name="Marker3D4" type="Marker3D" parent="PlayerSpawnMarker" unique_id=850701734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.5, 34.5)

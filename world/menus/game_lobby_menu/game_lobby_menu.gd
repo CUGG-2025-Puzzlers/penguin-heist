@@ -21,7 +21,7 @@ func _ready() -> void:
 	_set_room_code_label_text()
 	
 	# TODO: Change map selection to be from player input
-	selected_map = Map.ID.TEST
+	selected_map = Map.ID.Bank
 
 #region Event Handlers
 
