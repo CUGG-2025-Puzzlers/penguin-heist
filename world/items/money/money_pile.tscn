@@ -34,12 +34,13 @@ process_physics_priority = -2147483647
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=194448712]
 shape = SubResource("BoxShape3D_5gfrf")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=2047280137]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-billboard = 1
-text = "E to pick up"
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1160297571]
 mesh = SubResource("BoxMesh_l6v6b")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhwd4")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=2047280137]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7678767, 0)
+visible = false
+billboard = 1
+text = "E to pick up"
