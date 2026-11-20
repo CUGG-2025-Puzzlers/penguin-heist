@@ -38,6 +38,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 [node name="item_use_timer" type="Timer" parent="ProtoController" unique_id=423784113]
 wait_time = 2.0
 
+[node name="SnowballHUD" type="CanvasLayer" parent="." unique_id=29458750]
+
+[node name="SnowballCounter" type="Label" parent="SnowballHUD" unique_id=673757520]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+offset_top = -51.0
+offset_right = -79.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+text = "Snowball: 0 / 3"
+horizontal_alignment = 2
+
 [connection signal="timeout" from="ProtoController/item_use_timer" to="." method="_on_item_use_timer_timeout"]
 
 [editable path="ProtoController"]

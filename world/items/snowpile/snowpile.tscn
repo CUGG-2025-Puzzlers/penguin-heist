@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dhhdklc3vtyh"]
+
+[ext_resource type="Script" uid="uid://fojfpisjiety" path="res://world/items/snowpile/snowpile.gd" id="1_wgb5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emakx"]
+roughness = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_1es6n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nuw01"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jrxa7"]
+
+[node name="Snowpile" type="StaticBody3D" unique_id=297806172]
+script = ExtResource("1_wgb5k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1341027246]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_emakx")
+mesh = SubResource("SphereMesh_1es6n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1250374734]
+shape = SubResource("SphereShape3D_nuw01")
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=532253617]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=906620891]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_jrxa7")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="." method="_on_area_3d_body_exited"]

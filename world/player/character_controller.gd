@@ -1,11 +1,16 @@
 extends Node3D
 @onready var raycast = %InteractRay
 
+
 var current_interactable = null
 
 var canThrow = true
 
 var snowball = preload("res://world/items/snowball/snowball.tscn")
+const maxSnowball = 3
+var snowballCount = 0
+
+@onready var snowball_counter: Label = $SnowballHUD/SnowballCounter
 
 var cursor_locked = true
 
@@ -41,6 +46,9 @@ func hide_current_prompt():
 		current_interactable.hide_prompt()
 		current_interactable = null
 
+func _ready() -> void:
+	update_snowball_counter()
+
 
 func snowballThrow():
 	if held_fish:
@@ -50,6 +58,12 @@ func snowballThrow():
 
 	if Input.is_action_just_released("input_throw") && canThrow:
 		var snowballins = snowball.instantiate()
+		
+		if snowballCount <= 0:
+			return
+		
+		snowballCount -= 1
+		update_snowball_counter()
 		snowballins.position = $ProtoController/Head/snowballpos.global_position
 		get_tree().current_scene.add_child(snowballins)
 		
@@ -62,6 +76,7 @@ func snowballThrow():
 		var playerRotation = $ProtoController/Head.global_transform.basis.z.normalized()
 		
 		snowballins.apply_central_impulse(playerRotation * force + Vector3(0, upDirection, 0))
+		
 
 func _on_item_use_timer_timeout():
 	canThrow = true
@@ -108,3 +123,13 @@ func slap():
 
 	await swing.finished
 	slapping = false
+
+
+func refill_snowballs() -> void:
+	if snowballCount < maxSnowball:
+		snowballCount = maxSnowball
+		update_snowball_counter()
+
+
+func update_snowball_counter() -> void:
+	snowball_counter.text = "Snowballs: " + str(snowballCount) + " / " + str(maxSnowball)
