@@ -246,18 +246,17 @@ func _check_hover_collision() -> void:
 	
 	# TODO: Check if collider parent is an Interactable instead of checking if
 	# 		it has an "interact" method 
-	var item = collider.get_parent()
-	if not (item.has_method("interact") or item.has_method("pick_up")):
-		item = null
+	if not (collider.has_method("interact") or collider.has_method("pick_up")):
+		collider = null
 
-	if item == current_interactable:
+	if collider == current_interactable:
 		return
 	
 	# TODO: Move prompt to player HUD
 	_hide_current_prompt()
 
-	if item:
-		current_interactable = item
+	if collider:
+		current_interactable = collider
 		current_interactable.show_prompt()
 
 func _hide_current_prompt() -> void:
@@ -296,17 +295,16 @@ func activate() -> void:
 	if hit == null:
 		return
 
-	var item = hit.get_parent()
-	if item and item.has_method("pick_up"):
+	if hit and hit.has_method("pick_up"):
 		_hide_current_prompt()
-		held_fish = item
-		item.pick_up(_hand)
-	if item and item.has_method("interact"):
+		held_fish = hit
+		hit.pick_up(_hand)
+	if hit and hit.has_method("pick_up"):
 		_hide_current_prompt()
 		
 		#TODO: change held_fish to held_item
-		held_fish = item 
-		item.pick_up(_hand)
+		held_fish = hit 
+		hit.pick_up(_hand)
 
 func slap() -> void:
 	if slapping:

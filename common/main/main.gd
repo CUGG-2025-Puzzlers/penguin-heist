@@ -17,7 +17,6 @@ extends Node
 @onready var _map_spawner     : FusionSpawner = %MapSpawner
 @onready var _money_spawner   : FusionSpawner = %MoneyPileSpawner
 @onready var _map_item_spawner: FusionSpawner = %MapItemSpawner
-@onready var _held_item_spawner: FusionSpawner = %HeldItemSpawner
 
 var _player      : PlayerController
 var _current_map : Map
