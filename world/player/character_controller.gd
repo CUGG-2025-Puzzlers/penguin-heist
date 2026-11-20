@@ -238,6 +238,7 @@ func _check_input_mappings() -> void:
 
 func _check_hover_collision() -> void:
 	if not _raycast.is_colliding():
+		_hide_current_prompt()
 		return
 	
 	var collider: Object = _raycast.get_collider()
