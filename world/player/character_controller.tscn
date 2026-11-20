@@ -36,7 +36,7 @@ collide_with_areas = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 
 [node name="item_use_timer" type="Timer" parent="ProtoController" unique_id=423784113]
-wait_time = 2.0
+wait_time = 0.5
 
 [node name="SnowballHUD" type="CanvasLayer" parent="." unique_id=29458750]
 
