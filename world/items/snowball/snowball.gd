@@ -24,6 +24,9 @@ func _on_body_entered(_body: Node) -> void:
 	if not _replicator.has_authority():
 		return
 	
+	if _body is PlayerController:
+		_body.snowball_hit(self.linear_velocity)
+	
 	_spawner.despawn(self)
 
 #endregion

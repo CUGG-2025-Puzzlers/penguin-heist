@@ -44,6 +44,14 @@ var held_item = null
 var can_throw : bool = true
 var slapping  : bool = false
 
+var state : int = State.STANDING
+
+enum State {
+	STANDING,
+	KNOCKED,
+	RECOVERING
+}
+
 #region Node Overrides
 
 func _ready() -> void:
@@ -85,14 +93,18 @@ func _physics_process(delta: float) -> void:
 	_handle_movement()
 	
 	# Use velocity to actually move
+	if state != State.KNOCKED
 	move_and_slide()
 	
 	_check_hover_collision()
 	
-	if Input.is_action_just_pressed("input_throw"):
+	if Input.is_action_just_pressed("input_throw") and state == State.STANDING:
 		_use_held_item()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if state != State.STANDING:
+		return
+	
 	# Prevent other players from controlling this character
 	if Fusion.is_connected_to_photon() and not _replicator.has_authority():
 		return
@@ -326,3 +338,13 @@ func slap() -> void:
 	slapping = false
 
 #endregion
+
+func snowball_hit(snowball_vel: Vector3):
+	state = State.KNOCKED
+	velocity += snowball_vel.normalized() * .3
+	pass
+
+func recover():
+	state = State.RECOVERING
+	
+	state = State.STANDING
