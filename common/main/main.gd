@@ -296,4 +296,14 @@ func _on_fish_spawn_requested(pos: Vector3) -> void:
 	
 	fish.global_position = pos
 	
+func _on_cash_spawn_requested(pos: Vector3) -> void:
+	var cash = _map_item_spawner.spawn() #TODO ID the spawnable map items (fish, squid, etc.)
+	
+	if cash == null:
+		print("Error spawning fish")
+		return
+	
+	cash.global_position = pos
+	cash.pick_up()
+
 #endregion

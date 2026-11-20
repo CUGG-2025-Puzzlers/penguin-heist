@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://nl3qrs3f2xix"]
+
+[ext_resource type="Script" uid="uid://buns2glo6pnm1" path="res://world/items/money/cash.gd" id="1_risaw"]
+
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_risaw"]
+property_count = 2
+properties/0/path = NodePath(".:hand")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+properties/1/path = NodePath(".:is_held")
+properties/1/max_array_capacity = 0
+properties/1/interface_tag = ""
+properties/1/interpolate = 0
+properties/1/element_type = 0
+properties/1/element_class_name = ""
+
+[sub_resource type="BoxMesh" id="BoxMesh_risaw"]
+size = Vector3(0.2, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l6v6b"]
+size = Vector3(0.2, 0.1, 0.1)
+
+[node name="Cash" type="RigidBody3D" unique_id=2124409204]
+script = ExtResource("1_risaw")
+
+[node name="Replicator" type="FusionSharedReplicator" parent="." unique_id=1442845957]
+replication_config = SubResource("FusionReplicationConfig_risaw")
+root_interpolation_mode = 2
+unique_name_in_owner = true
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
+[node name="Label3D" type="Label3D" parent="." unique_id=321838515]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+visible = false
+billboard = 1
+text = "E to pick up"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=352375258]
+mesh = SubResource("BoxMesh_risaw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1973198733]
+shape = SubResource("BoxShape3D_l6v6b")
