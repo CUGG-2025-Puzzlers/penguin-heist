@@ -30,6 +30,7 @@ var move_speed : float = 0.0
 var freeflying : bool = false
 
 @onready var _head           : Node3D    = %CharacterHead
+@onready var _face           : Node3D    = %Face
 @onready var _player_camera  : Camera3D  = %PlayerCamera
 @onready var _raycast        : RayCast3D = %InteractRay
 @onready var _snowball_pos   : Marker3D  = %SnowballPos
@@ -54,6 +55,7 @@ func _ready() -> void:
 	_check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = _head.rotation.x
+	_face.visible = false
 	
 	GlobalEvents.request_add_hud(HUD.ID.PLAYER)
 
