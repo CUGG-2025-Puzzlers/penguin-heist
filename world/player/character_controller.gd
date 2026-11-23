@@ -360,6 +360,7 @@ func snowball_hit(snowball_vel: Vector3):
 	print("Snowball velocity: " + str(snowball_vel))
 	state = State.KNOCKED
 	ragdoll_visible = true
+	_ragdoll.apply_central_impulse(snowball_vel * 0.7)
 	_knocked_timer.start()
 
 
