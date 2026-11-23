@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://4v4fgigkhaq"]
+
+[ext_resource type="Script" uid="uid://43hrx35afpf6" path="res://world/player/ragdoll.gd" id="1_dipnx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_freip"]
+albedo_color = Color(0.14, 0.1232, 0.1064, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dipnx"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lq030"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyxc1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fjdjd"]
+material = SubResource("StandardMaterial3D_kyxc1")
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.1
+radial_segments = 10
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7er00"]
+albedo_color = Color(0.91764706, 0.5764706, 0.22352941, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xhlqm"]
+material = SubResource("StandardMaterial3D_7er00")
+top_radius = 0.005
+bottom_radius = 0.05
+height = 0.15
+radial_segments = 10
+
+[node name="Ragdoll" type="RigidBody3D" unique_id=838273121]
+script = ExtResource("1_dipnx")
+
+[node name="Replicator" type="FusionSharedReplicator" parent="." unique_id=536822838]
+root_replication_mode = 1
+root_interpolation_mode = 2
+unique_name_in_owner = true
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
+[node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=334262159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_freip")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_dipnx")
+
+[node name="CharacterCollider" type="CollisionShape3D" parent="." unique_id=1383276582]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_lq030")
+
+[node name="CharacterHead" type="Node3D" parent="." unique_id=1381461536]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterHead" unique_id=1913035375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+remote_path = NodePath("../RagdollCamera")
+update_rotation = false
+update_scale = false
+
+[node name="Face" type="Node3D" parent="CharacterHead" unique_id=711329269]
+unique_name_in_owner = true
+
+[node name="LeftEye" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=728625349]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15, -0.29999995, -0.36)
+mesh = SubResource("CylinderMesh_fjdjd")
+
+[node name="RightEye" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=1297174777]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.15, -0.29999995, -0.36)
+mesh = SubResource("CylinderMesh_fjdjd")
+
+[node name="Beak" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=478486010]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.4728893, -0.47007746)
+mesh = SubResource("CylinderMesh_xhlqm")
+
+[node name="RagdollCamera" type="Camera3D" parent="CharacterHead" unique_id=521835238]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4000001, 0)
+top_level = true
+visible = false
+current = true
+
+[node name="InteractRay" type="RayCast3D" parent="CharacterHead/RagdollCamera" unique_id=903254289]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -4)
+collide_with_areas = true
+
+[node name="Hand" type="Marker3D" parent="CharacterHead/RagdollCamera" unique_id=141786562]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.45, -0.4, -0.8)
+
+[node name="SnowballPos" type="Marker3D" parent="CharacterHead" unique_id=752754465]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
