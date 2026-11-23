@@ -348,3 +348,7 @@ func recover():
 	state = State.RECOVERING
 	
 	state = State.STANDING
+@rpc("any_peer", "call_remote", "reliable")
+func receive_snowball_hit(vel: Vector3) -> void:
+	if _replicator.has_authority():
+		snowball_hit(vel)

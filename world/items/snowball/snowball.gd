@@ -25,7 +25,14 @@ func _on_body_entered(_body: Node) -> void:
 		return
 	
 	if _body is PlayerController:
-		_body.snowball_hit(self.linear_velocity)
+		if not Fusion.is_connected_to_photon() or _body._replicator.has_authority():
+			_body.snowball_hit(self.linear_velocity)
+		else:
+			Fusion.rpc_to_player(_body._replicator.get_owner_id(), _body.receive_snowball_hit, self.linear_velocity)
+	
+	if not Fusion.is_connected_to_photon() or not _spawner:
+		queue_free()
+		return
 	
 	_spawner.despawn(self)
 
