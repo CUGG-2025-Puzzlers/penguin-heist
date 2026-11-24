@@ -390,9 +390,10 @@ func _switch_visible_body():
 
 func recover():
 	state = State.RECOVERING
+	var stand = create_tween()
+	stand.tween_property(_ragdoll, "rotation", Vector3(0,0,0), 1.0)
+	await stand.finished
 	ragdoll_visible = false
-	global_rotation = Vector3()
-	global_position += Vector3(0, 1, 0)
 	state = State.STANDING
 
 func _on_ragdoll_spawned(node : Node3D) -> void:
