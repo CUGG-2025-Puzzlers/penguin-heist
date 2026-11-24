@@ -377,6 +377,9 @@ func _switch_visible_body():
 	
 	if (ragdoll_visible):
 		_ragdoll.global_transform = global_transform
+		_ragdoll.camera.rotation = Vector3(self.look_rotation.x, self.look_rotation.y, 0)
+		print("Ragdoll camera rotation: " + str(_ragdoll.camera.rotation))
+		print("Look rotation: " + str(self.look_rotation))
 	_ragdoll.freeze = !ragdoll_visible
 	_ragdoll.collision_layer = ragdoll_visible
 	_ragdoll.collision_mask = ragdoll_visible
