@@ -5,4 +5,3 @@ extends RigidBody3D
 
 func _ready() -> void:
 	face.visible = false
-	camera.clear_current()

@@ -90,7 +90,6 @@ mesh = SubResource("CylinderMesh_7er00")
 [node name="PlayerCamera" type="Camera3D" parent="Body/CharacterHead" unique_id=1087492476]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
-current = true
 
 [node name="InteractRay" type="RayCast3D" parent="Body/CharacterHead/PlayerCamera" unique_id=1185292218]
 unique_name_in_owner = true

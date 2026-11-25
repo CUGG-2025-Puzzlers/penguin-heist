@@ -65,12 +65,9 @@ enum State {
 
 func _ready() -> void:
 	_ragdoll_spawner.spawned.connect(_on_ragdoll_spawned)
-
-	if Fusion.is_connected_to_photon() and not _replicator.has_authority():
-		_player_camera.current = false
-		return
-
+	
 	if Fusion.is_connected_to_photon() and _replicator.has_authority():
+		_player_camera.make_current()
 		_ragdoll = _ragdoll_spawner.spawn()
 	
 	_item_use_timer.timeout.connect(_on_item_use_timer_timeout)
@@ -79,7 +76,7 @@ func _ready() -> void:
 	_check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = _head.rotation.x
-	_face.visible = false
+	_face.visible = Fusion.is_connected_to_photon() and not _replicator.has_authority()
 	
 	GlobalEvents.request_add_hud(HUD.ID.PLAYER)
 
@@ -401,6 +398,8 @@ func recover():
 
 func _on_ragdoll_spawned(node : Node3D) -> void:
 	_ragdoll = node
+	_ragdoll.face.visible = Fusion.is_connected_to_photon() and not _replicator.has_authority()
+	
 	_switch_visible_body()
 
 @rpc("any_peer", "call_remote", "reliable")
