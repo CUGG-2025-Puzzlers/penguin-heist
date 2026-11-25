@@ -305,7 +305,7 @@ func _use_held_item() -> void:
 		can_throw = false
 		_item_use_timer.start()
 		
-		GlobalEvents.request_snowball_throw(_snowball_pos)
+		GlobalEvents.request_snowball_throw(_snowball_pos, self)
 
 func _on_item_use_timer_timeout() -> void:
 	can_throw = true

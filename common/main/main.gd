@@ -101,9 +101,9 @@ func _on_player_spawn_requested(pos: Vector3) -> void:
 ## Event Handler for when a snowball is requested to be thrown.[br]
 ## Attempts to spawn and throw the snowball from the marker given by 
 ## [param spawn_marker]
-func _on_snowball_throw_requested(spawn_marker: Marker3D) -> void:
+func _on_snowball_throw_requested(spawn_marker: Marker3D, thrower: Node3D) -> void:
 	print("Snowball throw request accepted. Throwing snowball, watch out!")
-	_throw_snowball(spawn_marker)
+	_throw_snowball(spawn_marker, thrower)
 
 #endregion
 
@@ -263,14 +263,14 @@ func _spawn_player(pos: Vector3) -> void:
 ## Spawns a snowball using the FusionSpawner to allow for networking
 ## Sets the position to the [param spawn_marker]'s position and launches
 ## it in the forward direction of the marker
-func _throw_snowball(spawn_marker: Marker3D) -> void:
+func _throw_snowball(spawn_marker: Marker3D, thrower: Node3D) -> void:
 	var snowball: Snowball = _snowball_spawner.spawn() as Snowball
 		
 	# TODO: Print some error if spawner did not spawn a snowball scene
 	if not snowball:
 		return
-	
 	snowball.set_spawner(_snowball_spawner)
+	snowball.add_collision_exception_with(thrower)
 	snowball.global_position = spawn_marker.global_position
 	var launch_direction: Vector3 = -spawn_marker.global_basis.z
 	snowball.launch(launch_direction)
