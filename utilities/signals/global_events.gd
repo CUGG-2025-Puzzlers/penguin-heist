@@ -60,9 +60,9 @@ func request_player_spawn(pos: Vector3) -> void:
 
 signal snowball_throw_requested(spawn_marker: Marker3D)
 
-func request_snowball_throw(spawn_marker: Marker3D) -> void:
+func request_snowball_throw(spawn_marker: Marker3D, thrower: Node3D) -> void:
 	print("Requesting to throw a snowball")
-	snowball_throw_requested.emit(spawn_marker)
+	snowball_throw_requested.emit(spawn_marker, thrower)
 
 #endregion
 

@@ -1,17 +1,25 @@
 [gd_scene format=3 uid="uid://c6mor2d4870ba"]
 
 [ext_resource type="Script" uid="uid://devttgmosotk1" path="res://world/player/character_controller.gd" id="1_7er00"]
+[ext_resource type="PackedScene" uid="uid://4v4fgigkhaq" path="res://world/player/ragdoll.tscn" id="2_7er00"]
 
 [sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_7er00"]
+property_count = 1
+properties/0/path = NodePath(".:ragdoll_visible")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.14, 0.1232, 0.1064, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
 radius = 0.4
 height = 1.8
 
@@ -46,54 +54,66 @@ unique_name_in_owner = true
 process_priority = -2147483647
 process_physics_priority = -2147483647
 
-[node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=400821634]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-material_override = SubResource("StandardMaterial3D_iof21")
-cast_shadow = 0
-mesh = SubResource("CapsuleMesh_ucva2")
-
 [node name="CharacterCollider" type="CollisionShape3D" parent="." unique_id=932706275]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_iof21")
 
-[node name="CharacterHead" type="Node3D" parent="." unique_id=1791332881]
+[node name="Body" type="Node3D" parent="." unique_id=472254088]
+unique_name_in_owner = true
+
+[node name="CharacterMesh" type="MeshInstance3D" parent="Body" unique_id=400821634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_iof21")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ucva2")
+
+[node name="CharacterHead" type="Node3D" parent="Body" unique_id=1791332881]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="Face" type="Node3D" parent="CharacterHead" unique_id=750773325]
+[node name="Face" type="Node3D" parent="Body/CharacterHead" unique_id=750773325]
 unique_name_in_owner = true
 
-[node name="LeftEye" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=29886845]
+[node name="LeftEye" type="MeshInstance3D" parent="Body/CharacterHead/Face" unique_id=29886845]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15, -0.29999995, -0.36)
 mesh = SubResource("CylinderMesh_kyxc1")
 
-[node name="RightEye" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=1658135334]
+[node name="RightEye" type="MeshInstance3D" parent="Body/CharacterHead/Face" unique_id=1658135334]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.15, -0.29999995, -0.36)
 mesh = SubResource("CylinderMesh_kyxc1")
 
-[node name="Beak" type="MeshInstance3D" parent="CharacterHead/Face" unique_id=1473328376]
+[node name="Beak" type="MeshInstance3D" parent="Body/CharacterHead/Face" unique_id=1473328376]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.4728893, -0.47007746)
 mesh = SubResource("CylinderMesh_7er00")
 
-[node name="PlayerCamera" type="Camera3D" parent="CharacterHead" unique_id=1087492476]
+[node name="PlayerCamera" type="Camera3D" parent="Body/CharacterHead" unique_id=1087492476]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
-current = true
 
-[node name="InteractRay" type="RayCast3D" parent="CharacterHead/PlayerCamera" unique_id=1185292218]
+[node name="InteractRay" type="RayCast3D" parent="Body/CharacterHead/PlayerCamera" unique_id=1185292218]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collide_with_areas = true
 
-[node name="Hand" type="Marker3D" parent="CharacterHead/PlayerCamera" unique_id=1698277592]
+[node name="Hand" type="Marker3D" parent="Body/CharacterHead/PlayerCamera" unique_id=1698277592]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.45, -0.4, -0.8)
 
-[node name="SnowballPos" type="Marker3D" parent="CharacterHead" unique_id=1043207918]
+[node name="SnowballPos" type="Marker3D" parent="Body/CharacterHead" unique_id=1043207918]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29026008, -0.66103363)
 
 [node name="ItemUseTimer" type="Timer" parent="." unique_id=423784113]
 unique_name_in_owner = true
 wait_time = 2.0
+
+[node name="RagdollSpawner" type="FusionSpawner" parent="." unique_id=165921714]
+spawn_as_sub_object = true
+spawnable_scenes = Array[PackedScene]([ExtResource("2_7er00")])
+unique_name_in_owner = true
+
+[node name="KnockedTimer" type="Timer" parent="." unique_id=3114456]
+unique_name_in_owner = true
+wait_time = 2.3
+one_shot = true

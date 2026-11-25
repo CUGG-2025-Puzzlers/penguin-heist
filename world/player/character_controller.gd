@@ -36,33 +36,56 @@ var freeflying : bool = false
 @onready var _raycast        : RayCast3D = %InteractRay
 @onready var _snowball_pos   : Marker3D  = %SnowballPos
 @onready var _item_use_timer : Timer     = %ItemUseTimer
+@onready var _knocked_timer  : Timer     = %KnockedTimer
 @onready var _collider   : CollisionShape3D       = %CharacterCollider
 @onready var _replicator : FusionSharedReplicator = %CharacterReplicator
+@onready var _ragdoll_spawner : FusionSpawner = %RagdollSpawner
+
+var _ragdoll : RigidBody3D
+@export var ragdoll_visible : bool = false:
+	set(is_visible):
+		ragdoll_visible = is_visible
+		if is_node_ready():
+			_switch_visible_body()
 
 var current_interactable = null
 var held_item = null
 var can_throw : bool = true
 var slapping  : bool = false
 
+var state : int = State.STANDING
+
+enum State {
+	STANDING,
+	KNOCKED,
+	RECOVERING
+}
+
 #region Node Overrides
 
 func _ready() -> void:
-	if Fusion.is_connected_to_photon() and not _replicator.has_authority():
-		_player_camera.current = false
-		return
+	_ragdoll_spawner.spawned.connect(_on_ragdoll_spawned)
+	
+	if Fusion.is_connected_to_photon() and _replicator.has_authority():
+		_player_camera.make_current()
+		_ragdoll = _ragdoll_spawner.spawn()
 	
 	_item_use_timer.timeout.connect(_on_item_use_timer_timeout)
+	_knocked_timer.timeout.connect(recover)
 	
 	_check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = _head.rotation.x
-	_face.visible = false
+	_face.visible = Fusion.is_connected_to_photon() and not _replicator.has_authority()
 	
 	GlobalEvents.request_add_hud(HUD.ID.PLAYER)
 
 func _physics_process(delta: float) -> void:
 	# Prevent other players from controlling this character
 	if Fusion.is_connected_to_photon() and not _replicator.has_authority():
+		return
+	
+	if state == State.RECOVERING or state == State.KNOCKED:
 		return
 	
 	# If freeflying, handle freefly and nothing else
@@ -89,10 +112,13 @@ func _physics_process(delta: float) -> void:
 	
 	_check_hover_collision()
 	
-	if Input.is_action_just_pressed("input_throw"):
+	if Input.is_action_just_pressed("input_throw") and state == State.STANDING:
 		_use_held_item()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if state != State.STANDING:
+		return
+	
 	# Prevent other players from controlling this character
 	if Fusion.is_connected_to_photon() and not _replicator.has_authority():
 		return
@@ -279,7 +305,7 @@ func _use_held_item() -> void:
 		can_throw = false
 		_item_use_timer.start()
 		
-		GlobalEvents.request_snowball_throw(_snowball_pos)
+		GlobalEvents.request_snowball_throw(_snowball_pos, self)
 
 func _on_item_use_timer_timeout() -> void:
 	can_throw = true
@@ -326,3 +352,57 @@ func slap() -> void:
 	slapping = false
 
 #endregion
+
+func snowball_hit(snowball_vel: Vector3):
+	print("Snowball velocity: " + str(snowball_vel))
+	state = State.KNOCKED
+	ragdoll_visible = true
+	_ragdoll.apply_central_impulse(snowball_vel * 0.7)
+	_knocked_timer.start()
+
+
+func _switch_visible_body():
+	if not is_instance_valid(_ragdoll):
+		return
+	
+	if (!ragdoll_visible):
+		self.global_transform = _ragdoll.global_transform
+	self.collision_layer = !ragdoll_visible
+	self.collision_mask = !ragdoll_visible
+	_collider.disabled = ragdoll_visible
+	%Body.visible = !ragdoll_visible
+	
+	if (ragdoll_visible):
+		_ragdoll.global_transform = global_transform
+		_ragdoll.camera.rotation = Vector3(self.look_rotation.x, self.look_rotation.y, 0)
+		print("Ragdoll camera rotation: " + str(_ragdoll.camera.rotation))
+		print("Look rotation: " + str(self.look_rotation))
+	_ragdoll.freeze = !ragdoll_visible
+	_ragdoll.collision_layer = ragdoll_visible
+	_ragdoll.collision_mask = ragdoll_visible
+	_ragdoll.visible = ragdoll_visible
+	
+	if Fusion.is_connected_to_photon() and _replicator.has_authority():
+		if !ragdoll_visible:
+			_player_camera.make_current()
+		if ragdoll_visible:
+			_ragdoll.camera.make_current()
+
+func recover():
+	state = State.RECOVERING
+	var stand = create_tween()
+	stand.tween_property(_ragdoll, "rotation", Vector3(0,0,0), 1.0)
+	await stand.finished
+	ragdoll_visible = false
+	state = State.STANDING
+
+func _on_ragdoll_spawned(node : Node3D) -> void:
+	_ragdoll = node
+	_ragdoll.face.visible = Fusion.is_connected_to_photon() and not _replicator.has_authority()
+	
+	_switch_visible_body()
+
+@rpc("any_peer", "call_remote", "reliable")
+func receive_snowball_hit(vel: Vector3) -> void:
+	if _replicator.has_authority():
+		snowball_hit(vel)
