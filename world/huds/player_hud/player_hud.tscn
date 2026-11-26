@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgftc5o2kqmr6"]
 
 [ext_resource type="Texture2D" uid="uid://cnerwgng75n40" path="res://world/huds/crosshair.png" id="1_gvqda"]
-[ext_resource type="Script" uid="uid://dws0i2kltx6ca" path="res://world/huds/hud.gd" id="1_peuab"]
+[ext_resource type="Script" uid="uid://dnrsodpjo2sf8" path="res://world/huds/player_hud/player_hud.gd" id="1_peuab"]
 
 [node name="PlayerHUD" type="Control" unique_id=1509901111]
 layout_mode = 3
@@ -24,3 +24,9 @@ grow_vertical = 2
 [node name="Crosshair" type="TextureRect" parent="CrosshairContainer" unique_id=1561574971]
 layout_mode = 2
 texture = ExtResource("1_gvqda")
+
+[node name="Countdown" type="Label" parent="." unique_id=1849669632]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

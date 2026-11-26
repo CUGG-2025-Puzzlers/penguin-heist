@@ -7,6 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://d1w5ciq1ogcqt" path="res://world/maps/rooms/Security.tscn" id="5_n5p7n"]
 [ext_resource type="PackedScene" uid="uid://ccbg2pf0vtams" path="res://world/maps/rooms/Office.tscn" id="6_mc3dx"]
 
+[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_i5hdh"]
+property_count = 1
+properties/0/path = NodePath(":seconds_left")
+properties/0/max_array_capacity = 0
+properties/0/interface_tag = ""
+properties/0/interpolate = 0
+properties/0/element_type = 0
+properties/0/element_class_name = ""
+
 [sub_resource type="Environment" id="Environment_a7qfo"]
 ambient_light_source = 2
 ambient_light_color = Color(0.98803645, 0.98624766, 0.9960334, 1)
@@ -18,6 +27,7 @@ _player_spawn_markers = [NodePath("PlayerSpawnMarker/Marker3D"), NodePath("Playe
 
 [node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1859141942]
 owner_mode = 3
+replication_config = SubResource("FusionReplicationConfig_i5hdh")
 root_replication_mode = 1
 process_priority = -2147483647
 process_physics_priority = -2147483647
@@ -52,3 +62,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 34.5)
 
 [node name="Marker3D4" type="Marker3D" parent="PlayerSpawnMarker" unique_id=850701734]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.5, 34.5)
+
+[node name="RoundTimer" type="Timer" parent="." unique_id=1179204527]
+unique_name_in_owner = true
+wait_time = 300.0
+one_shot = true
